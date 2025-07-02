@@ -1,0 +1,339 @@
+<!doctype html>
+<html class="no-js" lang="{{ shop.locale }}">
+<head>
+<meta name="google-site-verification" content="BBQaLKquHSOtJrElbgejnGmvdgYiZi3l8_grxViaIrU" />
+<!-- AMPIFY-ME:START -->
+{% include 'ampify-me-snippet' %}
+<!-- AMPIFY-ME:END -->
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="{{ settings.color_button }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+  <meta name="format-detection" content="telephone=no">
+  <link rel='icon' href="https://cdn.shopify.com/s/files/1/0089/6306/3874/files/apple-touch-icon.png?v=1588046924" type='image/x-icon'/ >
+  <link rel="apple-touch-icon" href="https://cdn.shopify.com/s/files/1/0089/6306/3874/files/apple-touch-icon.png?v=1588046924">
+  {%- if settings.favicon -%}
+    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png" />
+  {%- endif -%}
+
+	{% include 'SEOManager' %}
+  
+  
+  {%- include 'social-meta-tags' -%}
+
+  {% include 'font-face' %}
+  {{ 'custom.css' | asset_url | stylesheet_tag }}
+  {{ 'custom-styles.scss' | asset_url | stylesheet_tag }}
+  {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+  
+
+
+  <script>
+    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+
+    window.theme = window.theme || {};
+    theme.strings = {
+      addToCart: {{ 'products.product.add_to_cart' | t | json }},
+      soldOut: {{ 'products.product.sold_out' | t | json }},
+      unavailable: {{ 'products.product.unavailable' | t | json }},
+      stockLabel: {{ 'products.product.stock_label' | t: count: '[count]' | json }},
+      savePrice: {{ 'products.general.save_html' | t: saved_amount: '[saved_amount]' | json }},
+      cartSavings: {{ 'cart.general.savings_html' | t: savings: '[savings]' | json }},
+      cartEmpty: {{ 'cart.general.empty' | t | json }},
+      cartTermsConfirmation: {{ 'cart.general.terms_confirm' | t | json }}
+    };
+    theme.settings = {
+      cartType: {{ settings.cart_type | json }},
+      moneyFormat: {{ shop.money_format | json }},
+      recentlyViewedEnabled: false,
+      quickView: {{ settings.quick_shop_enable }},
+      themeVersion: "1.3.1"
+    };
+  </script>
+
+  {{ content_for_header }}{% include 'webyze-infinitelivepreviewoptions' %}
+
+  {% include 'oldIE-js' %}
+
+  {% include 'defer-script' with 'vendor.js' %}
+
+  {% if settings.enable_currencies %}
+    <script src="/services/javascripts/currencies.js" defer="defer"></script>
+    {% include 'defer-script' with 'jquery.currencies.min.js' %}
+  {% endif %}
+
+  {% include 'defer-script' with 'theme.js' %}
+
+  {%- if template contains 'customers' -%}
+    {% include 'defer-shopify-script' with 'shopify_common.js' %}
+  {%- endif -%}
+  {% comment %}{% include 'disable-right-click' %}{% endcomment %}
+  <!-- Global site tag (gtag.js) - Google Ads: 705540772 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-705540772"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-705540772');
+</script>
+<!-- Event snippet for Google Shopping App Purchase conversion page -->
+<script>
+  gtag('event', 'conversion', {
+      'send_to': 'AW-705540772/DXkTCOjo3qwBEKTlttAC',
+      'value': 0.0,
+      'transaction_id': ''
+  });
+</script>
+
+{% section 'filter-menu-settings' %}
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-35Z4CH0FJW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-35Z4CH0FJW');
+</script>
+  
+  <meta name="google-site-verification" content="He_jGzgjs8g8xgTvgnQqKZsZ9smTPN6_rzdhwb99YU8" />
+  <meta name="ahrefs-site-verification" content="e8989a734d79241780be2f037fa0be96e3eb8b3c5683f100ad4f18122f57234d">
+    <!-- Code By Uzi For Meta Title Modification -->
+    <!-- This code is modifying meta title for all products as per the product collection -->
+    
+    {% assign current_path = request.path %}
+    
+    <!-- Meta Title Logic -->
+    
+    {% if current_path contains '/collections/' and current_path contains '/' %}
+      {% assign segments = current_path | split: '/' %}
+      {% if segments.size > 3 %}
+        {% assign collection_name = segments[2] | replace: '-', ' ' | capitalize %}
+        {% assign sub_collection_name = segments[3] | replace: '-', ' ' | capitalize %}
+        <title>{{ collection_name }} {{ sub_collection_name }} | {{ sub_collection_name }} Luxury Watches Price | Shop Online</title>
+      {% else %}
+        {% if current_path contains '/collections/rolex/products' %}
+          <title>{{ product.title }} | Shop Now</title>
+        {% elsif current_path contains '/collections/pre-owned-' and current_path contains '/products' %}
+          {% assign brand = current_path | split: '/' | slice: 2 | remove: 'pre-owned-' %}
+          <title>Pre-owned {{ product.title }} | Shop Now</title>
+        {% elsif current_path contains '/collections/' and current_path contains '/products' %}
+          {% assign brand = current_path | split: '/' | slice: 2 %}
+          <title>Pre-Owned {{ product.title }} | Shop Now</title>
+        {% else %}
+          {% if page_title %}
+            <title>{{ page_title | escape }}</title>
+          {% endif %}
+        {% endif %}
+      {% endif %}
+    {% else %}
+      {% if page_title %}
+        <title>{{ page_title | escape }}</title>
+      {% endif %}
+    {% endif %}
+    
+    <!-- Meta Description Logic -->
+    {% if current_path contains '/collections/' and current_path contains '/' %}
+      {% assign segments = current_path | split: '/' %}
+      {% if segments.size > 3 %}
+        {% assign collection_name = segments[2] | replace: '-', ' ' | capitalize %}
+        {% assign sub_collection_name = segments[3] | replace: '-', ' ' | capitalize %}
+        <meta name="description" content="Discover the luxurious and innovative world of {{ collection_name }} {{ sub_collection_name }} watches. Explore {{ collection_name }} {{ sub_collection_name }} watch prices and unique features of these exquisite timepieces. Shop Now. In Stock.">
+      {% else %}
+        {% if current_path contains '/collections/rolex/products' %}
+          <meta name="description" content="Discover the {{ product.title }}, a perfect blend of precision engineering and elegant design. Shop Online. In Stock.">
+        {% elsif current_path contains '/collections/pre-owned-' and current_path contains '/products' %}
+          {% assign brand = current_path | split: '/' | slice: 2 | remove: 'pre-owned-' %}
+          <meta name="description" content="Discover the {{ product.title }}, a perfect blend of precision engineering and elegant design. Shop Online. In Stock.">
+        {% elsif current_path contains '/collections/' and current_path contains '/products' %}
+          {% assign brand = current_path | split: '/' | slice: 2 %}
+          <meta name="description" content="Discover the {{ product.title }}, a perfect blend of precision engineering and elegant design. Shop Online. In Stock.">
+        {% else %}
+          {% if page_description %}
+            <meta name="description" content="{{ page_description | escape }}">
+          {% endif %}
+        {% endif %}
+      {% endif %}
+    {% else %}
+      {% if page_description %}
+        <meta name="description" content="{{ page_description | escape }}">
+      {% endif %}
+    {% endif %}
+
+
+  <!-- END  -->
+
+  
+  {% render 'qikify-apps' %}
+
+  <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/10f23950a50ce2bdb4e02875b/df06ea348cb3208795973468a.js");</script>
+	<script src='https://api.qcpg.cc/api/v2/vendors/script/8399bb3f-10e3-4b47-a59e-9428c8b01035'></script> 
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KM77M3V2');</script>
+<!-- End Google Tag Manager -->
+</head>
+
+<body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if settings.enable_currencies %} currencies-enabled{% endif %}" data-transitions="false">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KM77M3V2"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+  {% comment %}
+    Enable below script if page transitions enabled
+  {% endcomment %}
+  {% comment %}
+  <script type="text/javascript">window.setTimeout(function() { document.body.className += " loaded"; }, 25);</script>
+  {% endcomment %}
+
+  <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
+
+  <div id="PageContainer" class="page-container">
+    <div class="transition-body">
+
+    {% section 'header' %}
+
+      <main class="main-content" id="MainContent">
+        {{ content_for_layout }}
+<script type="text/javascript">if(typeof webyze_filterCollectionProducts == 'function')webyze_filterCollectionProducts();</script>
+      </main>
+
+      {% section 'footer-promotions' %}
+      {% section 'footer' %}
+
+    </div>
+  </div>
+
+  {% section 'newsletter-popup' %}
+
+  {% if settings.cart_type == 'drawer' %}
+    {% include 'ajax-cart-template' %}
+  {% endif %}
+
+  {% if settings.enable_currencies %}
+    <span
+      id="CurrencyData"
+      class="hide"
+      data-shop-currency="{{ shop.currency }}"
+      data-default-currency="{{ settings.default_currency | default: shop.currency }}"
+      data-format="{{ settings.currency_format | default: 'money_with_currency_format' }}"
+      data-money-format="{{ shop.money_format | strip_html }}"
+      data-money-currency-format="{{ shop.money_with_currency_format | strip_html }}">
+    </span>
+  {% endif %}
+
+  {% include 'qty-selector-template' %}
+  {% include 'video-modal' %}
+  {% include 'photoswipe-template' %}
+  {% if template contains 'product' %}
+    {% include 'recently-viewed-product-template' %}
+  {% endif %}
+<!-- Delete the Beeketing script below after uninstalling Happy Messenger app to remove it from your theme. For more info, read here: https://bit.ly/hmesscode or contact us at hi@beeketing.com. --><!-- BEEKETINGSCRIPT CODE START -->{% include 'bk-tracking' %}<!-- BEEKETINGSCRIPT CODE END --> {% include 'smile-initializer' %}
+
+{% include 'social-login' %}{{ '//cdn.shopify.com/s/files/1/0194/1736/6592/t/1/assets/booster-page-speed-optimizer.js?23' | script_tag }}
+{% comment %}{% include 'mw_fees_objects' %}<script type="text/javascript" src="https://xtra-infos.app.prod.fuznet.com/public/js/check-uninstall.js"></script>{% endcomment %}
+
+<!-- sh-ssp-added -->
+{% render 'sh-ssp-theme-snippet' %}
+<!-- /sh-ssp-added -->
+<script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+<div class="elfsight-app-4719fe76-37ab-46e7-b6a2-f6568548b8fe" data-elfsight-app-lazy></div>
+<script>
+  // Price on request
+  function cfpSearch() {
+   $("<span>Price on request</span>").replaceAll(".snize-price:contains($0.00)");
+    //console.log("Price on req init");
+}
+setInterval(cfpSearch, 500);
+</script>
+</body>
+</html>
+
+
+
+<style type="text/css">
+.tmenu_submenu .tmenu_submenu_type_tab .tmenu_submenu--desktop .tmenu_submenu_mega_position_fullwidth .tmenu_submenu_tab_position_left {
+  -webkit-box-shadow: inset 0 0 0 0px #eaeaea,0 0px 0px rgba(0,0,0,0)!important;
+  box-shadow: inset 0 0 0 0px #eaeaea,0 0px 0px rgba(0,0,0,0)!important;
+}
+
+.tmenu_item--root>.tmenu_submenu {
+    -webkit-box-shadow: inset 0 0 0 0px #eaeaea,0 0px 0px rgba(0,0,0,0)!important;
+  box-shadow: inset 0 0 0 0px #eaeaea,0 0px 0px rgba(0,0,0,0)!important;
+}
+  
+.tmenu_submenu .tmenu_submenu_type_mega .tmenu_submenu--desktop .tmenu_submenu_mega_position_fullwidth{
+  border-top: 1px solid rgba(211,211,211, 0.3) !important;
+}
+
+
+  <!-- Code Added By Simplee Built-->
+  .grid-product__tag--sold-out {
+  	display: none;
+  }
+  .grid-product__link--disabled .grid-product__image-mask, .grid-product__link--disabled:hover .grid-product__image-mask, .grid-product__link--disabled:focus .grid-product__image-mask {
+  	opacity: 1;
+  }
+  .collection-sidebar__group:first-child {
+  	display: none !important;
+  }
+  .privacy-message {
+  	display: none !important;
+  }
+  @media only screen and (min-width: 600px) {
+  	.shopify-cleanslate ._1M9S34W-UyhhDRRQQiV3RH {
+  		border-radius: 4px !important;
+  		width: 340px !important;
+  		height: 44px !important;
+  		margin-left: 10px !important;
+  	}
+  }
+  @media only screen and (max-width: 600px) {
+  	.shopify-cleanslate ._1M9S34W-UyhhDRRQQiV3RH {
+  		margin-left: 10px !important;
+  		width: 270px !important;
+  		height: 43px !important;
+  	}
+  }
+  	@media only screen and (max-width: 767px) {
+  		.site-nav__link--icon+.site-nav__link--icon {
+  			margin-left: 0px !important;
+  		}
+  	}
+  	@media only screen and (max-width: 767px) {
+  		.site-nav__link--icon.js-search-header {
+  			margin-right: 0px !important;
+  		}
+  	}
+
+
+ body {   
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
+            user-drag: none; 
+}
+   img {
+  user-drag: none; 
+user-select: none;
+-moz-user-select: none;
+-webkit-user-drag: none;
+-webkit-user-select: none;
+-ms-user-select: none;
+}
+</style>
+
+
+
+

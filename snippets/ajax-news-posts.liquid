@@ -1,0 +1,6 @@
+{% for article in blogs.news.articles %}
+    <div class="post" data-id="{{ article.id }}">
+        <h2>{{ article.title }}</h2>
+        <p>{{ article.excerpt }}</p>
+    </div>
+{% endfor %}

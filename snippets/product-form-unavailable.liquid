@@ -1,0 +1,222 @@
+{% capture form_id %}AddToCartForm-{{ section_id }}{% endcapture %}
+{% form 'product', product, id: form_id, class: 'product-single__form' %}
+ {% if template contains 'unavailable' %}
+             
+<script>
+  function clipATCs() {
+  document.querySelector("[data-shopify='payment-button']").style.display = "none";
+  document.querySelector(".variant-wrapper").style.display = "none";
+  document.getElementById("WTI1").style.display = "none"
+  document.getElementById("AddToCart-{{ section_id }}").style.display = "none";
+  };
+  window.onload = clipATCs;
+                          
+var element = document.getElementById('cfa');
+if (typeof(element) != 'undefined' && element !== null) {
+    document.getElementById('WTI1').style.display = "none";
+    document.getElementById('WTI').style.display = "none";
+} else {
+    var format = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2,
+    });
+    var fullPrice = document.querySelector("span[id^='ProductPrice-']").children[0].textContent.replace(/\.00$/, '');
+    var fullPriceclean = fullPrice.substring(1);
+    var fullPricecleaner = fullPriceclean.replace(/,/g, '');
+    var wirePrice1step = fullPricecleaner * 0.03;
+    var wirePrice2step = fullPricecleaner - wirePrice1step;
+    document.getElementById('saveSpan').innerHTML = format.format(wirePrice2step);
+
+}
+</script>
+<a type="button" id="cfa" class="cfa btn btn--full add-to-cart desktopOnly btn--secondary" onclick="emailingFCT();" style="margin: 0px 0px 7.5%; display: none;">E-mail for availability</a>
+<script>
+  function callingFCT() {
+         document.getElementById('cfa').innerHTML = 'Calling...';
+          doneCallingFCT();
+        }
+        
+        function doneCallingFCT() {
+          setTimeout(function(){ document.getElementById('cfa').innerHTML = 'Call for availability'}, 3500);
+        }
+        
+        function emailingFCT() {
+         document.getElementById('cfa').innerHTML = 'Opening your E-mail client...';
+          document.getElementById("cfa").setAttribute("href", "mailto:info@firstclasstimepieces.com?subject=INQUIRY ABOUT AN ITEM&Body=Hi FCT,%0D%0A%0D%0AI had a question about an item, it's linked below.%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A" + window.location.href + "%0D%0A%0D%0A");
+          doneMailingFCT();
+        }
+       
+        function doneMailingFCT() {
+          setTimeout(function(){ document.getElementById('cfa').innerHTML = 'E-mail for availability'}, 3500);
+        }
+</script>
+{% endif %}
+
+  {%- assign enable_dynamic_buttons = false -%}
+  {% if settings.enable_payment_button and template != 'product.preorder' %}
+    {%- assign enable_dynamic_buttons = true -%}
+  {% endif %}
+<!-- CODE ADDED BY SIMPLEE BUILT -->
+      <a href="tel: +1 (917) 828-3727" type="button" onclick="callingFCT();" id="cfa" class="cfa btn btn--full mobileOnly add-to-cart btn--secondary" style="display: none;">
+        Call for Availability
+      </a>
+      <style>
+        .cfa {
+          transition: background 0.2s ease 0s;
+          line-height: 2;
+        }
+        .cfa:hover:not([disabled]){
+          background: #f2f2f2 !important;
+          color: #111 !important;
+        }
+      </style>
+      <script>
+        function callingFCT() {
+         document.getElementById('cfa').innerHTML = 'Calling...';
+          doneCallingFCT();
+        }
+        
+        function doneCallingFCT() {
+          setTimeout(function(){ document.getElementById('cfa').innerHTML = 'Call for availability'}, 3500);
+        }
+        
+        function emailingFCT() {
+         document.getElementById('cfa').innerHTML = 'Opening your E-mail client...';
+          document.getElementById("cfa").setAttribute("href", "mailto:info@firstclasstimepieces.com?subject=INQUIRY ABOUT AN ITEM&Body=Hi FCT,%0D%0A%0D%0AI had a question about an item, it's linked below.%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A" + window.location.href + "%0D%0A%0D%0A");
+          doneMailingFCT();
+        }
+       
+        function doneMailingFCT() {
+          setTimeout(function(){ document.getElementById('cfa').innerHTML = 'E-mail for availability'}, 3500);
+        }
+      </script>
+  {% if enable_dynamic_buttons %}
+    <div class="payment-buttons" id="clipMepls">
+  {% endif %}
+    <button
+      {% if product.empty? %}type="button"{% else %}type="submit"{% endif %}
+      name="add"
+      id="AddToCart-{{ section_id }}"
+      class="btn btn--full add-to-cart{% if enable_dynamic_buttons %} btn--secondary{% endif %}"
+      {% unless current_variant.available %} disabled="disabled"{% endunless %}>
+      <span id="AddToCartText-{{ section_id }}">
+        {% if current_variant.available %}
+          {% if template == 'product.preorder' %}
+            {{ 'products.product.preorder' | t }}
+          {% else %}
+            {{ 'products.product.add_to_cart' | t }}
+          {% endif %}
+        {% else %}
+          {{ 'products.product.sold_out' | t }}
+        {% endif %}
+      </span>
+    </button>
+	<a type="button" id="WTI" class="btn btn--full add-to-cart btn--black" style="line-height: 2; display: none;">Wire Transfer Instructions</a>
+    {% if enable_dynamic_buttons %}
+      {{ form | payment_button }}
+    {% endif %}
+
+  {% if enable_dynamic_buttons %}
+    </div>
+  {% endif %}
+   {% unless current_variant.available %}  
+   <script>
+        document.querySelector('[id^="AddToCart-"]').style.display = "none";
+      </script>
+   {% endunless %}
+  <div id="VariantsJson-{{ section_id }}" class="hide" aria-hidden="true">
+    {{ product.variants | json }}
+  </div>
+{% endform %}
+<script type="text/javascript">
+var element = document.getElementById('cfa');
+if (typeof(element) != 'undefined' && element !== null) {
+  	document.getElementById("clipMepls").style.display = "none";
+} else {
+    };
+</script>
+<script>
+// PRODUCT-TEMPLATE.LIQUID FILE
+var element = document.getElementById('cfa');
+if (typeof(element) != 'undefined' && element !== null) {
+    document.getElementById('WTI1').style.display = "none";
+    document.getElementById('WTI').style.display = "none";
+} else {
+    var format = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2,
+    });
+    var fullPrice = document.querySelector("span[id^='ProductPrice-']").children[0].textContent.replace(/\.00$/, '');
+    var fullPriceclean = fullPrice.substring(1);
+    var fullPricecleaner = fullPriceclean.replace(/,/g, '');
+    var wirePrice1step = fullPricecleaner * 0.03;
+    var wirePrice2step = fullPricecleaner - wirePrice1step;
+    document.getElementById('saveSpan').innerHTML = format.format(wirePrice2step);
+    document.getElementById('WTI').setAttribute("href", "https://firstclasstimepieces.com/pages/wire-transfer");
+    document.getElementById('WTI').setAttribute("target", "_blank");
+  	document.querySelector("input[id$='Wire+Transfer']").setAttribute('onclick', 'hideElems();');
+	document.querySelector("input[id$='Debit+Card']").setAttribute('onclick', 'showElems();');
+
+}
+function hideElems() {
+    var WTI = document.getElementById('WTI');
+    var ATC = document.querySelector("button[id^='AddToCart-']");
+    var GPB = document.getElementsByClassName("shopify-payment-button")[0];
+  	var BIN = document.querySelector("button[data-testid='Checkout-button']");
+    var CPP = document.querySelector("span[id^='ProductPrice-']");
+    ATC.style.display = "none";
+    CPP.style.color = "green";
+    CPP.style.fontWeight = "600";
+    WTI.style.display = "inline-block";
+    document.getElementById("savewithWire").style.display = "none";
+  	GPB.style.display = "none";
+  	BIN.style.display = "none";
+}
+
+function showElems() {
+    var WTI = document.getElementById('WTI');
+    var ATC = document.querySelector("button[id^='AddToCart-']");
+    var GPB = document.getElementsByClassName("shopify-payment-button")[0];
+    var BIN = document.querySelector("button[data-testid='Checkout-button']");
+    var CPP = document.querySelector("span[id^='ProductPrice-']");
+  	ATC.style.display = "inline-block";
+    CPP.style.color = "black";
+    CPP.style.fontWeight = "100";
+    WTI.style.display = "none";
+    document.getElementById("savewithWire").style.display = "block";
+   	GPB.style.display = "block";
+   	BIN.style.display = "inline-block";
+}
+function mobilePayments(x) {
+var WTI = document.getElementById('WTI');
+  if (scrSize.matches) {
+    WTI.style.marginBottom = "0px";
+  } else {
+   WTI.style.marginBottom = "50px";
+  }
+}
+
+var scrSize = window.matchMedia("(max-width: 700px)");
+mobilePayments(scrSize);
+scrSize.addListener(mobilePayments);
+</script>
+<style>
+  
+@media screen and (max-width: 768px) {
+  .mobileOnly {
+    margin-bottom: 40px;
+    display: inline-block !important;
+  }
+}
+  
+@media screen and (min-width: 800px) {
+  .desktopOnly {
+    display: inline-block !important;
+  }
+}
+  
+</style>
+<!-- END OF CODE ADDED BY SIMPLEE BUILT -->
+

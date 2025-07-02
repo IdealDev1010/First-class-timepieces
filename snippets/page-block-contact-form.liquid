@@ -1,0 +1,98 @@
+<!-- Code Added By Simplee Built -->
+<div class="index-section">
+	<div class="page-width">
+		{% if block.settings.title != blank %}
+		<div class="section-header">
+			<h2 class="section-header__title">{{ block.settings.title }}</h2>
+		</div>{% endif %}
+		<div class="form-vertical">
+			{% form 'contact' %}
+		    {% if form.posted_successfully? %}
+		        <p class="note note--success">{{ 'contact.form.post_success' | t }}</p>
+		        <script>
+		            // Redirect to the Thank You page after 2 seconds (or immediately if desired)
+		            setTimeout(function() {
+		                window.location.href = '/pages/thank-you-sell-your-watch'; // Use the URL of your Thank You page here
+		            }, 2000); // 2000 milliseconds = 2 seconds
+		        </script>
+		    {% endif %}
+		    {{ form.errors | default_errors }}
+
+		    <div class="grid grid--small">
+		        <div class="grid__item medium-up--one-half">
+		            <label for="ContactFormFName">First Name</label>
+		            <input required="required" class="input-full" id="ContactFormFName" name="contact[fname]" type="text" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.first_name }}{% endif %}">
+		        </div>
+		        <div class="grid__item medium-up--one-half">
+		            <label for="ContactFormLName">Last Name</label>
+		            <input required="required" class="input-full" id="ContactFormLName" name="contact[lname]" type="text" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.last_name  }}{% endif %}">
+		        </div>
+		        <div class="grid__item medium-up--one-half">
+		            <label for="ContactFormEmail">{{ 'contact.form.email' | t }}</label>
+		            <input required="required" class="input-full" id="ContactFormEmail" name="contact[email]" type="email" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
+		        </div>
+		        <div class="grid__item medium-up--one-half">
+		            <label for="ContactFormPhone">{{ 'contact.form.phone' | t }}</label>
+		            <input required="required" class="input-full" id="ContactFormPhone" name="contact[phone]" pattern="[0-9\-]*" type="tel" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}">
+		        </div>
+		        <div class="grid__item medium-up--one-half">
+		            <label for="tradeorSell">Trade or sell?</label>
+		            <select required id="tradeorSell" name="contact[tradeorSell]">
+		                <option>Select One</option>
+		                <option>Trade my watch</option>
+		                <option>Sell my watch</option>
+		            </select>
+		        </div>
+		        <div class="grid__item medium-up--one-half">
+		            <label for="watchBrand">My watch brand</label>
+		            <select required id="watchBrand" name="contact[watchBrand]">
+		                <option>Select Watch Brand</option>
+		                <option>Audemars Piguet</option>
+		                <option>Baume</option>
+		                <option>Bedat</option>
+		                <option>Breitling</option>
+		                <option>Cartier</option>
+		                <option>Chopard</option>
+		                <option>Hublot</option>
+		                <option>IWC</option>
+		                <option>Longines</option>
+		                <option>Mercier</option>
+		                <option>Omega</option>
+		                <option>Panerai</option>
+		                <option>Patek Philippe</option>
+		                <option>Piaget</option>
+		                <option>Richard Mille</option>
+		                <option>Rolex</option>
+		            </select>
+		        </div>
+		        <div class="grid__item medium-up--one-half">
+		            <label for="watchModelname">Watch Model Name</label>
+		            <input required="required" id="watchModelname" name="contact[watchModelname]" placeholder="Watch model name" type="text">
+		        </div>
+		        <div class="grid__item medium-up--one-half">
+		            <label for="watchModelnumber">Watch Model Number</label>
+		            <input id="watchModelnumber" name="contact[watchModelnumber]" placeholder="Watch model number" type="text">
+		        </div>
+		        <div class="grid__item medium-up--one-half">
+		            <label for="watchAge">Watch Age</label>
+		            <input id="watchAge" name="contact[watchAge]" placeholder="Watch age" type="text">
+		        </div>
+		        <div class="grid__item medium-up--one-half">
+		            <label for="boxPapers">Do you have the original box & papers?</label>
+		            <select required="required" id="boxPapers" name="contact[boxPapers]">
+		                <option>Select One</option>
+		                <option>Box only</option>
+		                <option>Papers only</option>
+		                <option>Box & Papers</option>
+		                <option>Neither</option>
+		            </select>
+		        </div>
+		        <label for="ContactFormMessage">What would you like to trade/sell your watch for?</label>
+		        <textarea required="required" class="input-full" id="ContactFormMessage" name="contact[body]" rows="5">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+		    </div>
+		    <button class="btn" type="submit">{{ 'contact.form.send' | t }}</button>
+			{% endform %}
+		</div>
+	</div>
+</div>
+<!-- End Of Code Added By Simplee Built -->

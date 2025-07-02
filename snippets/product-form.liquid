@@ -1,0 +1,156 @@
+{% capture form_id %}AddToCartForm-{{ section_id }}{% endcapture %}
+{% form 'product', product, id: form_id, class: 'product-single__form' %}
+  {% unless product.options.size == 1 and product.variants[0].title == 'Default Title' %}
+    {% for option in product.options_with_values %}
+      {% if settings.variant_type == 'button' %}
+        {% include 'variant-button', section_id: section_id, option_drop: option %}
+      {% else %}
+        {% include 'variant-dropdown', section_id: section_id %}
+      {% endif %}
+    {% endfor %}
+  {% endunless %}
+  <select name="id" id="ProductSelect-{{ section_id }}" class="product-single__variants no-js">
+    {% for variant in product.variants %}
+      {% if variant.available %}
+        <option {% if variant == product.selected_or_first_available_variant %}
+          selected="selected" {% endif %}
+          value="{{ variant.id }}">
+          {{ variant.title }} - {{ variant.price | money_with_currency }}
+        </option>
+      {% else %}
+        <option disabled="disabled">
+          {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+        </option>
+      {% endif %}
+    {% endfor %}
+  </select>
+
+  {% if settings.quantity_enable %}
+    <div class="product__quantity product__quantity--{{ settings.variant_type }} js-qty">
+      <label for="Quantity-{{ section_id }}">{{ 'products.product.quantity' | t }}</label>
+      <input type="number" hidden="hidden" id="Quantity-{{ section_id }}" name="quantity" value="1" min="1" class="js-qty__fallback">
+    </div>
+  {% endif %}
+
+  <div
+    id="ProductInventory-{{ section_id }}"
+    class="product__inventory {% unless inventory_visible %}hide{% endunless %}"
+    >
+    {% if current_variant.available %}
+      {{ 'products.product.stock_label' | t: count: current_variant.inventory_quantity }}
+    {% endif %}
+  </div>
+
+  {%- assign enable_dynamic_buttons = false -%}
+  {% if settings.enable_payment_button and template != 'product.preorder' %}
+    {%- assign enable_dynamic_buttons = true -%}
+  {% endif %}
+<!-- CODE ADDED BY SIMPLEE BUILT -->
+{% unless current_variant.available %}
+      <a href="tel: +1 (917) 828-3727" type="button" id="cfa" class="cfa btn btn--full add-to-cart btn--secondary">
+        Call for Availability
+      </a>
+{% endunless %}
+  {% if enable_dynamic_buttons %}
+    <div class="payment-buttons">
+  {% endif %}
+    <button
+      {% if product.empty? %}type="button"{% else %}type="submit"{% endif %}
+      name="add"
+      id="AddToCart-{{ section_id }}"
+      class="btn btn--full add-to-cart{% if enable_dynamic_buttons %} btn--secondary{% endif %}"
+      {% unless current_variant.available %} disabled="disabled"{% endunless %}>
+      <span id="AddToCartText-{{ section_id }}">
+        {% if current_variant.available %}
+          {% if template == 'product.preorder' %}
+            {{ 'products.product.preorder' | t }}
+          {% else %}
+            {{ 'products.product.add_to_cart' | t }}
+          {% endif %}
+        {% else %}
+          {{ 'products.product.sold_out' | t }}
+        {% endif %}
+      </span>
+    </button>
+    {% if enable_dynamic_buttons %}
+      {{ form | payment_button }}
+    {% endif %}
+
+  {% if enable_dynamic_buttons %}
+    </div>
+  {% endif %}
+  <div id="VariantsJson-{{ section_id }}" class="hide" aria-hidden="true">
+    {{ product.variants | json }}
+  </div>
+<a id="WTI" class="btn btn--full btn--black" style="line-height: 2;margin-bottom: 20px;" href="https://firstclasstimepieces.com/pages/wire-transfer" target="_blank">Wire Transfer Instructions</a>
+
+{% endform %}
+<script>
+// Function to update the display based on the presence of wire transfer
+function updateDisplayBasedOnPaymentMethod(isWireTransfer, selectedVariantValue) {
+  const paymentButtons = document.querySelector('.payment-buttons');
+  const wireTransferInstructions = document.getElementById('WTI');
+  const paymentMethodName = document.getElementById('pmtmethodname');
+  const productPrice = document.querySelector('.product__price');
+  const saveWithWireElement = document.getElementById('savewithWire');
+
+  // Set the text of "pmtmethodname" to the selected variant value
+  if (paymentMethodName) paymentMethodName.textContent = selectedVariantValue;
+
+  // Adjust display properties based on whether "Wire Transfer" is detected
+  if (isWireTransfer) {
+    // Actions when "Wire Transfer" is detected
+    console.log("Wire Transfer");
+    if (paymentButtons) paymentButtons.style.display = 'none';
+    if (wireTransferInstructions) wireTransferInstructions.style.display = ''; // Show Wire Transfer Instructions
+    if (saveWithWireElement) saveWithWireElement.style.display = 'none'; // Hide element with ID "savewithWire"
+    if (productPrice) {
+      productPrice.style.color = 'green';
+      productPrice.style.fontWeight = '600';
+    }
+  } else {
+    // Actions when other payment method is detected
+    console.log("Other payment method");
+    if (paymentButtons) paymentButtons.style.display = '';
+    if (wireTransferInstructions) wireTransferInstructions.style.display = 'none'; // Hide Wire Transfer Instructions
+    if (saveWithWireElement) saveWithWireElement.style.display = ''; // Show element with ID "savewithWire"
+    if (productPrice) {
+      productPrice.style.color = 'black';
+      productPrice.style.fontWeight = '400';
+    }
+  }
+}
+
+// Function to execute updateDisplayBasedOnPaymentMethod on page load
+function runUpdateDisplayOnLoad() {
+  // Get the value of the selected variant input
+  const selectedVariantInput = document.querySelector(".variant__input-{{ section_id }}:checked");
+  const selectedVariantValue = selectedVariantInput ? selectedVariantInput.value : '';
+
+  // Check if the selected variant value indicates "Wire Transfer"
+  const isWireTransfer = selectedVariantValue === "Wire Transfer";
+
+  // Call updateDisplayBasedOnPaymentMethod
+  updateDisplayBasedOnPaymentMethod(isWireTransfer, selectedVariantValue);
+}
+
+// Call runUpdateDisplayOnLoad when the DOM content is loaded
+document.addEventListener('DOMContentLoaded', runUpdateDisplayOnLoad);
+
+// Setup event listeners on elements with class "variant__input-{ section_id }}"
+document.querySelectorAll('.variant__input-{{ section_id }}').forEach(function(input) {
+  input.addEventListener('click', function() {
+    // Get the value of the selected variant input
+    const selectedVariantValue = this.value;
+    
+    // Check if the selected variant value indicates "Wire Transfer"
+    const isWireTransfer = selectedVariantValue === "Wire Transfer";
+    updateDisplayBasedOnPaymentMethod(isWireTransfer, selectedVariantValue);
+  });
+});
+
+
+</script>
+
+<!-- END OF CODE ADDED BY SIMPLEE BUILT -->
+

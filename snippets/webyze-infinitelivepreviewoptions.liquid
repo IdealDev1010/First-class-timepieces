@@ -1,0 +1,14 @@
+<script type="text/javascript">
+  var webyzeInfiniteLivePreviewOptions = {
+    pageType	: {{ template.name | json }}
+  };
+  {% if template.name == 'product' %}
+    webyzeInfiniteLivePreviewOptions.prodId = "{{ product.id }}";
+    webyzeInfiniteLivePreviewOptions.prodCollections = [];
+    {% for collection in product.collections %}webyzeInfiniteLivePreviewOptions.prodCollections.push("{{ collection.id }}");{% endfor %}
+    webyzeInfiniteLivePreviewOptions.prodData = {{product | json}};
+  {% endif %}
+var webyze_cartSelector='#shopify-section-cart-template, .cart-form, .cart, #cart, .cart-overview, form[action^="/cart"]',webyze_collectionGridSelectors='div.card, .grid__item, .list-view-item, .grid-item, div.product, div.thumbnail, div.product-index, .collection--product, .collection-grid>div, .product_c .element, .product-list .product-block, .collection-listing .product-block, .block-grid li, #search-results li, .row.results, .product-grid .product-item, .product-list>li, .collection-products .o-layout__item, .search-page__products .o-layout__item, .result, .list-products>.grid__cell, .product-item, .product-list-item, .search-item.product, .product-block, .box__collection.site-box, .collection-product, .results .search-item, .search-result-product, .list>.list-item, .searchresults>li, .product-grid>.block, .fw--search>.fw--blocks>div, .prod-block, li.prodThumb, [itemprop="itemListElement"]';
+window.Element&&!Element.prototype.closest&&(Element.prototype.closest=function(c){c=(this.document||this.ownerDocument).querySelectorAll(c);var a,b=this;do for(a=c.length;0<=--a&&c.item(a)!==b;);while(0>a&&(b=b.parentElement));return b});
+function webyze_filterCollectionProducts(){for(var c=document.querySelectorAll('a[href*="/products/webyze-user-product-"]'),a=0;a<c.length;a++){var b=c[a].closest(webyze_collectionGridSelectors);!c[a].closest(webyze_cartSelector)&&b&&b.parentNode&&b.parentNode.removeChild(b)}}webyze_filterCollectionProducts();setInterval(webyze_filterCollectionProducts,1300);
+</script>

@@ -1,0 +1,112 @@
+    
+                    <script src="https://xtra-infos.app.prod.fuznet.com/public/js/jquery.dom-outline-1.0.js"></script>
+                    <script>
+                      window.addEventListener("DOMContentLoaded", (event) => {
+                      
+                setTimeout(function(){ appendSelector("after", ".product-form", "#selector-xtra"); }, 1000);
+            
+                      $("#shopDomain").val("fctime.myshopify.com");
+                      var selector_element = GetURLParameter("selector_element");
+                      if(selector_element == "true"){  
+                        $("#top-selecter-button").show();
+                        var myExampleClickHandler = function(event){ 
+                          console.log(event);
+                          $("#log").html([
+                            "Element: ", 
+                            GetTagInfo(event)
+                          ].join("")); 
+                          $("#DomOutline").val(GetTagInfo(event).replace("#", "IDNAME"));
+                          myDomOutline.stop();
+                          console.log("stop");
+                        };
+                        var myDomOutline = DomOutline({ 
+                          onClick: myExampleClickHandler, 
+                          //filter: "form",
+                          stopOnClick: true,
+                          borderWidth: 2,
+                          hideLabel: false
+                        });
+                        myDomOutline.start();
+                            console.log("start init");
+                        $("#restartElement").click(function(){
+                            console.log("start");
+                          myDomOutline.start();
+                        });
+                        $("#saveElement").click(function(){
+                        var domain= "fctime.myshopify.com";
+                          $.ajax({url: "https://xtra-infos.app.prod.fuznet.com/dom-outline?shopDomain="+domain+"&DomOutline="+$("#DomOutline").val()+"&position="+$("#sPosition").val(), success: function(result){
+                            $("#saved").show();
+                            setTimeout(function(){$("#saved").hide(); }, 3000);
+                            close_window($("#shopDomain").val());
+                          }});
+                        });
+                      }
+                      function close_window(url) {
+                        var newWindow = window.open('', '_self', ''); //open the current window
+                        window.close(url);
+                      }
+                      function GetURLParameter(sParam)
+                      {
+                        var sPageURL = window.location.search.substring(1);
+                        var sURLVariables = sPageURL.split("&");
+                        for (var i = 0; i < sURLVariables.length; i++)
+                        {
+                          var sParameterName = sURLVariables[i].split("=");
+                          if (sParameterName[0] == sParam)
+                          {
+                            return decodeURIComponent(sParameterName[1]);
+                          }
+                        }
+                      }
+                      function GetTagInfo(event)
+                      {
+                        var pParentTag = $(event).parent().parent().prop("tagName");
+
+                        if(typeof $(event).parent().parent().attr("class") != "undefined"){
+                          var selecterClass = $(event).parent().parent().attr("class").trim().split(" ").join(".");
+                          pParentTag = pParentTag+"."+selecterClass;
+                        }
+                        var parentTag = $(event).parent().prop("tagName");
+
+                        if(typeof $(event).parent().attr("class") != "undefined"){
+                          var selecterClass = $(event).parent().attr("class").trim().split(" ").join(".");
+                          parentTag = parentTag+"."+selecterClass;
+                        }
+                        var selectorTag = $(event).prop("tagName");
+                        
+                        if(typeof $(event).attr("class") != "undefined"){
+                          var selecterClass = $(event).attr("class").trim().split(" ").join(".");
+                          selectorTag = selectorTag+"."+selecterClass;
+                        }
+                        return pParentTag+" "+parentTag+" "+selectorTag;
+                      }
+                      
+                      function appendSelector(position, element, contentElement){
+						var htmlString = $( contentElement ).html().replace("xtra-infos-container", "xtra-infos-container xtra-infos-container-copy");
+  
+                        if(position == "after"){
+                        	$(element).first().after(htmlString);
+                        }else{
+                        	$(element).first().before(htmlString);
+                        }
+                        console.log("appendSelector");
+                        console.log($(element));
+                      }
+                      });
+                    </script>
+                    <div id="top-selecter-button" style="display:none;position:fixed;width:100%;top: 0;text-align: center;margin: 20px auto;background: transparent;z-index: 999;">
+                    <div style=" width: 420px; margin: 0 auto; background: #e5e5e5; padding: 10px; border-radius: 10px;">
+                    <h4>Widget placement selection</h4>
+                    <div id="log" style="padding: 10px;"></div>
+                    <input type="hidden" name="DomOutline" id="DomOutline" value=""/>
+                    <input type="hidden" name="shopDomain" id="shopDomain" value=""/>
+                    <select name="sPosition" id="sPosition" style=" border: none; height: 40px;font-size: 13px;background-color: #fffcfc; ">
+                      <option value="after">after element</option>
+                      <option value="before">before element</option>
+                    </select>
+                    <input type="button" id="restartElement" value="restart" style="height: 40px;border: none;font-size: 13px;width: 50px;background-color: #fffcfc;"/>
+                    <input type="button" id="saveElement" value="save" style=" height: 40px; border: none; font-size: 13px; width: 50px; font-weight: bold; background-color: #fffcfc; "/>
+                    <div id="saved" style="padding: 10px;display: none;color: #0005ff;">Element saved, pls close this window!</div>
+                    </div>
+                    </div>
+        
