@@ -1,0 +1,141 @@
+<div class="warranty-highlight-section">
+    <div class="warranty-highlight-container page-width">
+    <h2 class="warranty-title">{{ section.settings.heading }}</h2>
+    <div class="warranty-highlight-grid">
+      <div class="warranty-highlight-text">
+        <p class="warranty-note">{{ section.settings.subtext }}</p>
+      </div>
+      <div class="warranty-highlight-image">
+        <img src="{{ section.settings.image | img_url: '800x' }}" alt="Warranty Image" />
+      </div>
+    </div>
+  </div>
+  
+  <style>
+    .warranty-highlight-section {
+      background-color: {{  section.settings.background_color }};
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_top }}px;
+    }
+  
+    .warranty-highlight-grid {
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+      justify-content: flex-end;
+    }
+
+    .warranty-highlight-text {
+        max-width: 217px;
+    }
+  
+    .warranty-title {
+        color: #E8492A;
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 120%; 
+        letter-spacing: -1px;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+    }
+  
+    .warranty-note {
+      font-size: 14px;
+      color: #d0452c;
+      line-height: 1.6;
+    }
+  
+    .warranty-highlight-image img {
+      width: 100%;
+      border-radius: 4px;
+    }
+  
+    @media (max-width: 767px) {
+      .warranty-highlight-grid {
+        display: flex;
+        flex-direction: row-reverse;
+      }
+  
+      .warranty-highlight-image {
+        order: -1;
+      }
+
+      .warranty-highlight-text {
+        max-width: 164px;  
+    }
+
+      .warranty-title {
+        color: #E8492A;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 120%; /* 24px */
+        letter-spacing: -1px;
+        text-transform: uppercase;
+      }
+    }
+  </style>
+  
+  {% schema %}
+  {
+    "name": "Warranty Highlight",
+    "tag": "section",
+    "class": "section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Main Heading",
+        "default": "WATCHES FROM FTC COME WITH A 3-YEAR WARRANTY OR THE REMAINING MANUFACTURER’S WARRANTY."
+      },
+      {
+        "type": "textarea",
+        "id": "subtext",
+        "label": "Sub Description",
+        "default": "We cover mechanical issues, but not wear, damage, loss, or third-party repairs. Vintage watches aren’t covered due to limited parts. Warranty claims are handled at our discretion."
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "default": "#fff"
+       },
+       {
+        "type": "header",
+        "content": "Padding"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "label": "Spacing",
+        "default": 20,
+        "min": 0,
+        "max": 80,
+        "step": 5,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "label": "Spacing",
+        "default": 20,
+        "min": 0,
+        "max": 80,
+        "step": 5,
+        "unit": "px"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Warranty Highlight"
+      }
+    ]
+  }
+  {% endschema %}
+  

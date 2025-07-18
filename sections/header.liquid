@@ -44,9 +44,9 @@
 </style>
 
 <div data-section-id="{{ section.id }}" data-section-type="header-section">
-  {% if overlay_header %}
+  {% unless overlay_header %}
     {% include 'announcement-bar' %}
-  {% endif %}
+  {% endunless %}
 
   {% unless overlay_header %}
     {% if section.settings.toolbar_currencies or section.settings.toolbar_social or section.settings.toolbar_menu != blank %}
@@ -70,6 +70,16 @@
             class="header-layout header-layout--{{ section.settings.main_menu_alignment }}"
             data-logo-align="{{ logo_alignment }}">
 
+            {% if section.settings.main_menu_alignment == 'left' or section.settings.main_menu_alignment == 'left-center' or section.settings.main_menu_alignment == 'left-drawer' %}
+              <button
+                type="button"
+                class="site-nav__link site-nav__link--icon js-drawer-open-nav{% if section.settings.main_menu_alignment == 'left' or section.settings.main_menu_alignment == 'left-center' %} medium-up--hide{% endif %}"
+                aria-controls="NavDrawer">
+                {% include 'icon-hamburger' %}
+                <span class="icon__fallback-text">{{ 'general.drawers.navigation' | t }}</span>
+              </button>
+            {% endif %}
+
             {% if logo_alignment == 'left' %}
               <div class="header-item header-item--logo">
                 {% include 'header-logo-block' %}
@@ -77,7 +87,7 @@
             {% endif %}
 
             {% if logo_alignment == 'left' and section.settings.main_menu_alignment != 'left-drawer' %}
-              <div class="header-item header-item--navigation{% if section.settings.main_menu_alignment == 'left-center' %} text-center{% endif %}">
+              <div class="header-item header-item--navigation{% if section.settings.main_menu_alignment == 'left-center' %} small-hide text-center{% endif %}">
                 {% include 'header-desktop-nav' %}
               </div>
             {% endif %}
@@ -156,9 +166,9 @@
     </div>
   </div>
 
-  {% unless overlay_header %}
+  {% comment %} {% unless overlay_header %}
     {% include 'announcement-bar' %}
-  {% endunless %}
+  {% endunless %} {% endcomment %}
 </div>
 
 {% schema %}

@@ -545,6 +545,11 @@
       },
       {
         "type": "checkbox",
+        "id": "type_enable",
+        "label": "Show type"
+      },
+      {
+        "type": "checkbox",
         "id": "sku_enable",
         "label": "Show SKU"
       },

@@ -1,9 +1,13 @@
+
 {% include 'product-template',
   image_position: section.settings.image_position,
   image_container_width: section.settings.image_size,
   section_id: product.id,
   social: section.settings.social_enable,
-  thumbnail_position: section.settings.thumbnail_position
+  thumbnail_position: section.settings.thumbnail_position,
+  image_layout: section.settings.image_layout,
+  mobile_layout: section.settings.mobile_layout,
+  section: section
 %}
 
 {% if settings.enable_product_reviews and settings.reviews_layout == 'full' %}
@@ -15,19 +19,19 @@
   </div>
 {% endif %}
 
-{% if section.settings.related_enable %}
+{% comment %} {% if section.settings.related_enable %}
   {% unless isModal %}
     {% include 'related-products' %}
   {% endunless %}
-{% endif %}
+{% endif %} {% endcomment %}
 
-{% if section.settings.recently_viewed_enable %}
+{% comment %} {% if section.settings.recently_viewed_enable %}
   {% unless isModal %}
     {% include 'recently-viewed' %}
   {% endunless %}
-{% endif %}
+{% endif %} {% endcomment %}
 
-{% if collection %}
+{% comment %} {% if collection %}
   {% unless isModal %}
     <div class="text-center page-content page-content--bottom">
       <a href="{% if collection.handle == 'frontpage' %}/{% else %}{{ collection.url }}{% endif %}" class="btn btn--small return-link">
@@ -35,11 +39,9 @@
       </a>
     </div>
   {% endunless %}
-{% endif %}
+{% endif %} {% endcomment %}
 
-<script>
-  theme.settings.recentlyViewedEnabled = {{ section.settings.recently_viewed_enable | default: 'false' }};
-</script>
+
 
 {% schema %}
   {
@@ -83,6 +85,38 @@
       },
       {
         "type": "select",
+        "id": "image_layout",
+        "options": [
+          {
+            "value": "column",
+            "label": "Column"
+          },
+          {
+            "value": "thumbnail",
+            "label": "Thumbnail"
+          }
+        ],
+        "default": "column",
+        "label": "Desktop layout"
+      },
+      {
+        "type": "select",
+        "id": "mobile_layout",
+        "options": [
+          {
+            "value": "column",
+            "label": "Column"
+          },
+          {
+            "value": "thumbnail",
+            "label": "Thumbnail"
+          }
+        ],
+        "default": "thumbnail",
+        "label": "Mobile layout"
+      },
+      {
+        "type": "select",
         "id": "thumbnail_position",
         "label": "Thumbnail position",
         "default": "beside",
@@ -119,37 +153,20 @@
         "label": "Enable social sharing",
         "default": true
       },
+    ],
+    "blocks": [
       {
-        "type": "checkbox",
-        "id": "related_enable",
-        "label": "Show related products",
-        "default": true
-      },
-      {
-        "type": "range",
-        "id": "related_count",
-        "label": "Number of related products",
-        "default": 5,
-        "min": 2,
-        "max": 6,
-        "step": 1
-      },
-      {
-        "type": "checkbox",
-        "id": "recently_viewed_enable",
-        "label": "Show recently viewed products",
-        "default": true,
-        "info": "Only visible outside of the Theme Editor"
-      },
-      {
-        "type": "range",
-        "id": "recent_count",
-        "label": "Number of recent products",
-        "default": 5,
-        "min": 2,
-        "max": 10,
-        "step": 1
+        "type": "feature",
+        "name": "Feature item",
+        "settings": [
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Feature Text"
+          }
+        ]
       }
+ 
     ]
   }
 {% endschema %}

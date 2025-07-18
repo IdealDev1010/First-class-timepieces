@@ -27,8 +27,7 @@
   {{ 'custom.css' | asset_url | stylesheet_tag }}
   {{ 'custom-styles.scss' | asset_url | stylesheet_tag }}
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
-  
-
+  {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
 
   <script>
     document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
@@ -72,6 +71,7 @@
   {% comment %}{% include 'disable-right-click' %}{% endcomment %}
   <!-- Global site tag (gtag.js) - Google Ads: 705540772 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-705540772"></script>
+<script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}

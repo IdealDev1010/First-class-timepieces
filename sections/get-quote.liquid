@@ -1,0 +1,258 @@
+    <section class="sell-watch-section page-width">
+      <div class="sell-watch-content">
+        <div class="sell-watch-header">
+            <h3>{{ section.settings.subheading }}</h3>
+            <h1>{{ section.settings.heading }}</h1>
+        </div>
+        <div class="sell-watch-container">
+            <div class="image-content small-hide">
+              {% if section.settings.left_image  %}
+                <img src="{{ section.settings.left_image | image_url: width: 550 }}" alt="Left Watch" class="watch-left" />
+              {% endif %}
+            </div>
+            <div class="image-with-text-content">
+                <div class="text-content">{{ section.settings.description }}</div>
+            <a href="{{ section.settings.btn_url }}" class="quote-button">{{ section.settings.button_label }}</a>
+            <div class="image-group">
+              {% if section.settings.small_image %}
+                <img src="{{ section.settings.small_image | image_url: width: 217 }}" alt="Detail Watch" class="small-image" />
+              {% endif %}
+              {% if section.settings.right_image %}
+                <img src="{{ section.settings.right_image | image_url: width: 335 }}" alt="Main Watch" class="main-image" />
+              {% endif %}
+            </div>
+            </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- SECTION STYLING -->
+    <style>
+    .sell-watch-section {
+      background-color: #ffffff;
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+      font-family: 'Georgia', serif;
+      color: #b42400;
+    }
+    .sell-watch-content {
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .sell-watch-container {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: end; 
+    }
+    .text-content {
+        color: #E8492A;
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 120%; 
+        letter-spacing: -1px;
+        text-transform: uppercase;
+        width: 55%;
+    }
+
+    .sell-watch-header h3 {
+        color: #E8492A;
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        text-transform: uppercase;
+    }
+
+    .sell-watch-header h1 {
+        color: #E8492A;
+        font-size: 64px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        text-transform: uppercase;
+    } 
+    .image-with-text-content {
+        max-width: 572px;
+    }
+    .text-content h3 {
+      font-size: 18px;
+      color: #b42400;
+      margin-bottom: 10px;
+    }
+    .text-content h1 {
+      font-size: 36px;
+      font-weight: bold;
+      color: #b42400;
+      margin-bottom: 20px;
+    }
+    .text-content p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #b42400;
+    }
+    .text-content .highlight {
+      color: #ff3b00;
+      font-weight: bold;
+    }
+    .quote-button {
+        display: inline-block;
+        color: rgba(252, 241, 227, 1);
+        padding: 12px 24px;
+        margin-top: 20px;
+        border-radius: 4px;
+        background: #E8492A;
+        text-decoration: none;
+        color: #FCF1E3;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        width: 100%;
+        text-align: center;
+    }
+    .quote-button:hover {
+      background-color: #d93200;
+    }
+    .watch-left {
+      height: 100%;
+    }
+    .image-group {
+      display: flex;
+      gap: 12px;
+      width: 100%;
+      align-items: end;
+      padding-top: 40px;
+    }
+    .image-group .small-image {
+      height: 100%;
+    }
+
+    @media(max-width: 767px) {
+        .sell-watch-header h3 {
+            color: #E8492A;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+            text-transform: uppercase;
+        }
+    
+        .sell-watch-header h1 {
+            color: #E8492A;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+            text-transform: uppercase;
+        }
+
+        .image-group .small-image {
+            height: 100%;
+            max-width:104px;
+        }
+        .image-group .main-image {
+            height: 100%;
+            max-width: 163px;
+        }
+
+        .image-group {
+            display: flex;
+            justify-content: space-between;
+        } 
+
+        .text-content {
+            margin-left: auto;
+        }
+    }
+    </style>
+
+    {% schema %}
+    {
+      "name": "Get quote",
+      "tag": "section",
+      "class": "section",
+      "settings": [
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "TIME FOR AN UPGRADE?"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Main Heading",
+          "default": "SELL OR TRADE YOUR WATCH"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>WE’LL MAKE THE WHOLE PROCESS SMOOTH, FAST, AND FAIR.</p>"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "Get a quote"
+        },
+        {
+          "type": "url",
+          "id": "btn_url",
+          "label": "Button Link"
+        },
+        {
+          "type": "image_picker",
+          "id": "left_image",
+          "label": "Left Side Watch Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "small_image",
+          "label": "Small Detail Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "right_image",
+          "label": "Main Watch Image"
+        },
+        {
+            "type": "header",
+            "content": "Padding"
+        },
+        {
+            "type": "range",
+            "id": "padding_top",
+            "label": "Spacing",
+            "default": 20,
+            "min": 0,
+            "max": 80,
+            "step": 5,
+            "unit": "px"
+        },
+        {
+            "type": "range",
+            "id": "padding_bottom",
+            "label": "Spacing",
+            "default": 20,
+            "min": 0,
+            "max": 80,
+            "step": 5,
+            "unit": "px"
+        }
+      ],
+      "presets": [
+        {
+          "name": "Sell or Trade Your Watch",
+          "category": "Custom"
+        }
+      ]
+    }
+    {% endschema %}
+    

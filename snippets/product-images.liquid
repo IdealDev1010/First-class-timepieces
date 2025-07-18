@@ -1,10 +1,10 @@
 {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
 
 {% unless product.empty? %}
-  <div class="product__photos product__photos-{{ section_id }} product__photos--{{ thumbnail_position }}">
+  <div class="product__photos product__photos-{{ section_id }} product__photos--{{ thumbnail_position }} small-hide">
 
     <div class="product__main-photos" data-aos>
-      <div id="ProductPhotos-{{ section_id }}">
+      <div id="ProductPhotos-{{ section_id }}" class="product-image-content">
         {% for image in product.images %}
           {%- assign is_featured = false -%}
           {% if featured_image == image %}
@@ -38,7 +38,7 @@
           {% if has_product_video %}
             {%- assign image_alt = product.title -%}
           {% endif %}
-          <div class="{% if is_featured %}starting-slide{% else %}secondary-slide{% endif %}" data-index="{{ forloop.index0 }}">
+          <div class="{% if is_featured %}starting-slide{% elsif image_layout == "thumbnail" %}secondary-slide {% endif %}" data-index="{{ forloop.index0 }}">
             <div class="product-image-main product-image-main--{{ section_id }}">
               <div class="image-wrap
                 {% if has_product_video and video_type == 'youtube' %} hide{% endif %}
@@ -136,8 +136,8 @@
     </div>
 
     <div
-      id="ProductThumbs-{{ section_id }}"
-      class="product__thumbs product__thumbs--{{ thumbnail_position }} {% if product.images.size == 1 %} medium-up--hide{% endif %} small--hide"
+      id="{% if image_layout == "thumbnail" %}ProductThumbs-{{ section_id }}{% endif %}"
+      class="{% unless image_layout == "thumbnail" %}hidden{% endunless %} product__thumbs product__thumbs--{{ thumbnail_position }} {% if product.images.size == 1 %} medium-up--hide{% endif %} small--hide"
       data-position="{{ thumbnail_position }}"
       data-aos>
 
@@ -210,3 +210,4 @@
     </div>
   </div>
 {% endunless %}
+

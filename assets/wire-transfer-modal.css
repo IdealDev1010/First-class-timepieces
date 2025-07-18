@@ -1,0 +1,344 @@
+/* Modal Styling */
+.wire-transfer-modal, .made-offer-modal {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(34, 34, 34, 0.30);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .wire-transfer-modal.open, .made-offer-modal.open {
+    display: flex;
+  }
+  
+  .wt-modal-container {
+    position: relative;
+  }
+
+  .modal-content {
+    display: flex;
+    background-color: #fff;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .modal-left {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal-image-content {
+    flex: 1;
+    background: #E8492A;
+    padding: 24px 40px;
+  }
+
+  .modal-product-title {
+    color: #FCF1E3;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%; 
+    text-align: left;
+  }
+
+  .modal-title {
+    color: #222;
+    text-align: center;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%; 
+    text-transform: uppercase;
+    max-width: 314px;
+  }
+
+  .modal-product-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    color: #FCF1E3;
+  }
+
+  .modal-product-variant-type {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  .modal-product-price .money {
+    font-family: "Dashiell Fine";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+  
+  .modal-left img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    aspect-ratio: 0.9;
+  }
+  
+  .modal-right {
+    padding: 40px 69px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .watch-form-wrapper {
+    max-width: 500px;
+    margin: 0 auto;
+    font-family: sans-serif;
+    color: #333;
+    line-height: 1.6;
+  }
+
+  .wti-contact-form, .mao-contact-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .watch-form-step {
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .watch-form-step h4 {
+    color: #222;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: uppercase;
+    text-align: left;
+    letter-spacing: 0px;
+  }
+  
+  .watch-form-step p {
+    margin: 0;
+    color: #222;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-align: left;
+    letter-spacing: 0px;
+  }
+  input {
+    border: none;
+  }
+
+  input:focus {
+    border: none;
+  }
+  .wti-contact-form input, .mao-contact-form input{
+    padding: 10px;
+    font-size: 14px;
+    border-bottom: 1px solid #ccc !important;
+  }
+
+  .wti-contact-form input:focus,  .mao-contact-form input:focus {
+    border-bottom: 1px solid #000 !important;
+  }
+  
+  .btn-submit {
+    background-color: #dc4b3e;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 16px;
+  }
+  
+  .btn-submit:hover {
+    background-color: #c43d30;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 40px;
+    right: 20px;
+    font-size: 1.5em;
+    background: transparent;
+    border: none;
+    color: #333;
+    cursor: pointer;
+  }
+
+  .close-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .wti-modal-btn {
+    color: #FFF;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    font-family: "DMSans-VariableFont", sans-serif;
+    line-height: normal;
+    text-transform: capitalize !important;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    padding: 24px 0 !important;
+    margin-bottom: 8px;
+  }
+  .wti-contact-form, .mao-contact-form {
+    margin-bottom: 16px;
+  }
+
+  .success-message {
+    border-radius: 4px;
+    background: #FCF1E3;
+    padding: 16px;
+    color: rgba(232, 73, 42, 1);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .success-message .message-text {
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+  
+  /* Media query for small screens */
+  @media (max-width: 768px) {
+    .modal-content {
+      flex-direction: column;
+      margin: 0 auto;
+    }
+
+    .wt-modal-container {
+        top: 20px;
+        width: 90%;
+        height: calc(100vh - 60px);
+        overflow: scroll;
+    } 
+
+    .modal-left {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .close-btn {
+        top: 16px;
+        right: 16px;
+        position: absolute;
+    }
+  
+    .modal-left img {
+      width: 170px;
+      height: auto;
+      aspect-ratio: 1.1;
+   
+    }
+  
+    .modal-right {
+      width: 100%;
+      padding: 24px 16px;
+    }
+
+    .modal-title {
+        text-align: center;
+        font-family: "Denton Test", sans-serif;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 120%; /* 28.8px */
+        text-transform: uppercase;
+        max-width: 200px;
+        padding-top: 20px;
+        margin: 0 auto;
+    }
+/* 
+    .template-product {
+        overflow: hidden;
+    } */
+
+    .watch-form-step {
+        display: flex;
+        flex-direction: row;
+        gap: 22px;
+        margin-bottom: 16px;
+    }
+
+    .modal-product-title {
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 120%;
+    }
+
+    .modal-product-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .modal-image-content {
+        padding: 16px;
+    }
+    .modal-product-variant-type {
+        font-size: 15px;
+    }
+
+    
+    .modal-product-price .money {
+        font-size: 16px;
+    }
+
+    .wti-contact-form input, .mao-contact-form input {
+        padding: 5px;
+    } 
+    .watch-form-step h4 {
+        white-space: nowrap;
+    }
+  }
+  
+  .mao-modal-btn {
+    color: #222;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: capitalize;
+    font-family: "DMSans-VariableFont", sans-serif;
+    background: transparent !important;
+    border-radius: 4px;
+    border: 1px solid #222;
+    width: 100%;
+    letter-spacing: 1px;
+    padding: 24px 0 !important;
+  }
+
+  .mao-modal-btn:hover {
+    color: #000 !important;
+  }
+
+  .mao-contact-form textarea {
+    border: none;
+    border-bottom: 1px solid rgba(34, 34, 34, 0.1);
+    min-height: 30px !important;
+  }

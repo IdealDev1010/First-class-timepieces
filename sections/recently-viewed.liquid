@@ -1,0 +1,94 @@
+{%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
+
+{% case section.settings.recent_count %}
+{% when 2 %}
+  {%- assign grid_item_width = 'medium-up--one-half' -%}
+{% when 3 %}
+  {%- assign grid_item_width = 'small--one-half medium-up--one-third' -%}
+{% when 4 %}
+  {%- assign grid_item_width = 'small--one-half medium-up--one-quarter' -%}
+{% when 6 %}
+  {%- assign grid_item_width = 'small--one-half medium-up--one-sixth' -%}
+{% when 8 %}
+  {%- assign grid_item_width = 'small--one-half medium-up--one-quarter' -%}
+{% endcase %}
+
+<div
+  data-subsection
+  data-section-id="{{ section.id }}"
+  data-section-type="recently-viewed"
+  data-product-handle="{{ product.handle }}"
+  data-recent-count="{{ section.settings.recent_count }}"
+  data-grid-item-class="{{ grid_item_width }}">
+  <div id="RecentlyViewed-{{ section.id }}" class="recently-viewed small-hide"></div>
+</div>
+
+<style>
+    .recently-viewed .section-header__title {
+        color: #222;
+        font-family: "Denton Test", sans-serif;
+        font-size: 64px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        text-transform: uppercase;
+        text-align: left;
+    }
+
+    .recently-viewed .grid-product__meta {
+        text-align: left;
+    }
+
+    .recently-viewed .grid-product__title {
+        color: #222;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 100%; 
+    }
+
+    .recently-viewed .grid-product__price {
+        overflow: hidden;
+        color: #222;
+        text-overflow: ellipsis;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    .recently-viewed .grid__item {
+        max-width: 335px;
+    }
+</style>
+
+<script>
+    theme.settings.recentlyViewedEnabled = {{ section.settings.recently_viewed_enable | default: 'false' }};
+</script>
+
+
+
+  {% schema %}
+  {
+      "name": "recently viewed",
+      "settings": [
+        {
+            "type": "checkbox",
+            "id": "recently_viewed_enable",
+            "label": "Show recently viewed products",
+            "default": true,
+            "info": "Only visible outside of the Theme Editor"
+          },
+          {
+            "type": "range",
+            "id": "recent_count",
+            "label": "Number of recent products",
+            "default": 3,
+            "min": 2,
+            "max": 10,
+            "step": 1
+          }
+      ]
+      
+  }
+{% endschema %}

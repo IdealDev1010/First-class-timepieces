@@ -1,0 +1,289 @@
+<div class="faq-wrapper">
+    <div class="faq-container page-width">
+        <h1 class="faq-container-title">FAQ</h1>
+        <div class="faq-content">
+            <div class="faq-header">
+            <h2 class="faq-title">{{ section.settings.title }}</h2>
+            <div class="faq-description">
+                <p>{{ section.settings.description }}</p>
+            </div>
+            </div>
+            <div class="faq-accordion">
+            {% for block in section.blocks %}
+                <div class="faq-item">
+                <button class="faq-question">
+                    <span class="faq-number">/{{ forloop.index | prepend: '0' }}</span>
+                    <span class="faq-label">{{ block.settings.question }}</span>
+                    <span class="faq-toggle faq-toggle-plus">{% render 'icon-plus' %}</span>
+                    <span class="faq-toggle faq-toggle-minus">{% render 'icon-minus' %}</span>
+                </button>
+                <div class="faq-answer">
+                    <p>{{ block.settings.answer }}</p>
+                </div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+  </div>
+  
+  <style>
+    .faq-wrapper {
+      background-color: {{  section.settings.background_color }};
+      padding-top: {{  section.settings.padding_top }}px;
+      padding-bottom: {{  section.settings.padding_bottom }}px;
+    }
+
+    .faq-container {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+    }
+
+    .faq-container-title {
+        color: #E8492A;
+        font-size: 64px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        text-transform: uppercase;
+    }
+
+    .faq-content {
+        width: 80%;
+    }
+  
+    .faq-header {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      max-width: 690px;
+      margin-bottom: 40px;
+      align-items: end;
+    }
+  
+    .faq-title {
+        color: #E8492A;
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 120%; 
+        text-transform: uppercase;
+    }
+  
+    .faq-description {
+        color: #E8492A;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 120%; 
+        width: 40%;
+    }
+  
+    .faq-accordion {
+      margin-top: 20px;
+    }
+  
+    .faq-item {
+      border-top: 1px solid #d0452c;
+      border-bottom: 1px solid transparent;
+      overflow: hidden;
+    }
+  
+    .faq-question {
+      background: none;
+      border: none;
+      width: 100%;
+      padding: 16px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      color: #E8492A;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      text-transform: uppercase;
+    }
+  
+    .faq-number {
+      color: #d0452c;
+      font-weight: 400;
+      padding-right: 30%;
+    }
+
+    .faq-toggle svg {
+        width: 11px;
+        height: 11px;
+    }
+  
+    .faq-answer {
+      display: none;
+      padding: 16px;
+      color: #333;
+      color: #E8492A;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 120%; 
+    }
+  
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+  
+    .faq-item.active .faq-toggle-minus {
+      display: block;
+    }
+
+    .faq-item.active .faq-toggle-plus {
+        display: none;
+    }
+
+    .faq-toggle-plus {
+        display: block;
+    }
+
+    .faq-toggle-minus {
+        display: none;
+    }
+    .faq-label {
+      display: flex;
+      flex-grow: 1;
+    }
+  
+    @media (max-width: 768px) {
+        .faq-container {
+            display: flex;
+            flex-direction: column;
+        }
+        .faq-content {
+            width: 100%;
+        }
+        .faq-title {
+            color: #E8492A;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 120%; 
+            text-transform: uppercase;
+        }
+
+        .faq-label {
+          max-width: 260px;
+          text-align: left;
+        }
+
+        .faq-number {
+          padding-right: 22px;
+        }
+
+        .faq-description {
+            color: #E8492A;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 120%;
+            width: 49%;
+        }
+
+        .faq-header {
+            flex-direction: column;
+        }
+
+        .faq-question {
+          display: flex;
+          align-items: baseline;
+        }
+    }
+  </style>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const faqItems = document.querySelectorAll('.faq-item');
+      faqItems.forEach(item => {
+        const button = item.querySelector('.faq-question');
+        button.addEventListener('click', () => {
+          item.classList.toggle('active');
+        });
+      });
+    });
+  </script>
+  
+  {% schema %}
+  {
+    "name": "Custom FAQ",
+    "tag": "section",
+    "class": "section",
+    "settings": [
+     {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "default": "#fff"
+     },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "FAQ Heading",
+        "default": "AT FCT, WE’RE PASSIONATE ABOUT FINE SWISS TIMEPIECES AND EXCEPTIONAL SERVICE."
+      },
+      {
+        "type": "textarea",
+        "id": "description",
+        "label": "Description",
+        "default": "We buy and sell luxury watches online through a trusted, modern platform.\nWhether you’re adding to your collection or letting go of a piece, we’re here to guide you every step of the way—making sure you feel confident in every decision."
+      },
+      {
+        "type": "header",
+        "content": "Padding"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "label": "Spacing",
+        "default": 20,
+        "min": 0,
+        "max": 80,
+        "step": 5,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "label": "Spacing",
+        "default": 20,
+        "min": 0,
+        "max": 80,
+        "step": 5,
+        "unit": "px"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "faq_item",
+        "name": "FAQ Item",
+        "settings": [
+          {
+            "type": "text",
+            "id": "question",
+            "label": "Question"
+          },
+          {
+            "type": "textarea",
+            "id": "answer",
+            "label": "Answer"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Custom FAQ",
+        "category": "Custom"
+      }
+    ]
+  }
+  {% endschema %}
+  

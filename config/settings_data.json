@@ -55,7 +55,8 @@
     "icon_weight": "3px",
     "icon_linecaps": "miter",
     "vendor_enable": false,
-    "sku_enable": true,
+    "type_enable": true,
+    "sku_enable": false,
     "quantity_enable": false,
     "variant_type": "button",
     "enable_payment_button": true,
@@ -77,7 +78,7 @@
     "product_content_collapse_2": true,
     "product_content_3": "",
     "product_content_collapse_3": true,
-    "product_contact": true,
+    "product_contact": false,
     "product_contact_title": "Ask a question",
     "enable_product_reviews": false,
     "reviews_layout": "expandable",
@@ -93,7 +94,7 @@
     "cart_notes_enable": false,
     "cart_terms_conditions_enable": false,
     "cart_terms_conditions_link": "shopify://policies/terms-of-service",
-    "enable_currencies": true,
+    "enable_currencies": false,
     "currency_format": "money_format",
     "supported_currencies": "USD CAD INR GBP AUD EUR JPY",
     "default_currency": "USD",
@@ -106,9 +107,9 @@
     "social_linkedin_link": "",
     "social_youtube_link": "",
     "social_vimeo_link": "",
-    "share_facebook": true,
-    "share_twitter": true,
-    "share_pinterest": true,
+    "share_facebook": false,
+    "share_twitter": false,
+    "share_pinterest": false,
     "homepage_social_image": "shopify://shop_images/FCT-_Display_Image.jpg",
     "favicon": "",
     "show_breadcrumbs": true,
@@ -263,13 +264,14 @@
           "1596488215701": {
             "type": "announcement",
             "settings": {
-              "text": "ORIGINAL BOX & WARRANTY - PRICE MATCH - 3 YEAR WARRANTY",
-              "link_text": "",
+              "text": "Book an appointment",
+              "link_text": "(917) 828-3727",
               "link": ""
             }
           },
           "1524770292306": {
             "type": "announcement",
+            "disabled": true,
             "settings": {
               "text": "FREE OVERNIGHT SHIPPING!",
               "link_text": "With No Minimum Required",
@@ -278,6 +280,7 @@
           },
           "1524770296206": {
             "type": "announcement",
+            "disabled": true,
             "settings": {
               "text": "Hassle-Free Returns",
               "link_text": "4-Day Returns",
@@ -292,15 +295,15 @@
           "1524770296206"
         ],
         "settings": {
-          "main_menu_link_list": "main-menu",
-          "main_menu_alignment": "center",
+          "main_menu_link_list": "update-main-menu",
+          "main_menu_alignment": "left-center",
           "header_style": "normal",
           "sticky_index": false,
           "sticky_collection": false,
           "header_search_enable": true,
-          "toolbar_menu": "footer",
-          "toolbar_social": true,
-          "toolbar_currencies": true,
+          "toolbar_menu": "",
+          "toolbar_social": false,
+          "toolbar_currencies": false,
           "announcement_compact": true
         }
       },
@@ -315,21 +318,21 @@
               "container_width": 25
             }
           },
+          "1545274083663": {
+            "type": "custom",
+            "settings": {
+              "show_footer_title": true,
+              "title": "Contacts",
+              "text": "<p>Address: <br/>26 West 47th St Suite 200 New York, NY 10036</p><p>Phone: <br/><a href=\"tel:%20+1 (917) 828-3727\" title=\"tel: +1 (917) 828-3727\">+1 (917) 828-3727</a></p><p>Email: <br/><a href=\"mailto:firstclasstimepieces@gmail.com\" title=\"mailto:info@firstclasstimepieces.com\">info@firstclasstimepieces.com</a></p>",
+              "container_width": 100
+            }
+          },
           "1588208850773": {
             "type": "menu",
             "settings": {
               "show_footer_title": false,
               "menu": "footer",
-              "container_width": 17
-            }
-          },
-          "1545274083663": {
-            "type": "custom",
-            "settings": {
-              "show_footer_title": true,
-              "title": "First Class Timepieces",
-              "text": "<p>Address: 26 West 47th St Suite 200 New York, NY 10036</p><p>Phone: <a href=\"tel:%20+1 (917) 828-3727\" title=\"tel: +1 (917) 828-3727\">+1 (917) 828-3727</a></p><p>Email: <a href=\"mailto:firstclasstimepieces@gmail.com\" title=\"mailto:info@firstclasstimepieces.com\">info@firstclasstimepieces.com</a></p>",
-              "container_width": 26
+              "container_width": 100
             }
           },
           "1494292487693": {
@@ -340,18 +343,28 @@
               "text": "<p>Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.</p>",
               "container_width": 32
             }
+          },
+          "menu_tFzzfN": {
+            "type": "menu",
+            "settings": {
+              "show_footer_title": false,
+              "menu": "policy",
+              "container_width": 100
+            }
           }
         },
         "block_order": [
           "1545279670100",
-          "1588208850773",
           "1545274083663",
-          "1494292487693"
+          "1588208850773",
+          "1494292487693",
+          "menu_tFzzfN"
         ],
         "settings": {
           "show_payment_icons": true,
           "show_copyright": true,
-          "copyright_text": "| All Rights Reserved | Created by <a href=\"https://www.fvst.io\" class=\"fvst_footer\"><img src=\"https://cdn.shopify.com/s/files/1/0089/6306/3874/files/fvst-dark.png\" height=\"12\" alt=\"FVST\"></a>"
+          "copyright_text": "All Rights Reserved",
+          "created_by": "<p>Created by NANO</p>"
         }
       },
       "collection-template": {
@@ -365,16 +378,60 @@
       },
       "product-template": {
         "type": "product-template",
+        "blocks": {
+          "feature_b4df4D": {
+            "type": "feature",
+            "settings": {
+              "text": "boutique in New York City"
+            }
+          },
+          "feature_4QByEx": {
+            "type": "feature",
+            "settings": {
+              "text": "100% certified authentic"
+            }
+          },
+          "feature_kRtV3w": {
+            "type": "feature",
+            "settings": {
+              "text": "ORIGINAL BOX & WARRANTY"
+            }
+          },
+          "feature_4mtrpr": {
+            "type": "feature",
+            "settings": {
+              "text": "PRICE MATCH"
+            }
+          },
+          "feature_gGwxzK": {
+            "type": "feature",
+            "settings": {
+              "text": "3 year warranty"
+            }
+          },
+          "feature_hVjTJa": {
+            "type": "feature",
+            "settings": {
+              "text": "Free overnight shipping"
+            }
+          }
+        },
+        "block_order": [
+          "feature_b4df4D",
+          "feature_4QByEx",
+          "feature_kRtV3w",
+          "feature_4mtrpr",
+          "feature_gGwxzK",
+          "feature_hVjTJa"
+        ],
         "settings": {
           "image_position": "left",
           "image_size": "medium",
+          "image_layout": "column",
+          "mobile_layout": "thumbnail",
           "thumbnail_position": "beside",
-          "description_style": "full",
-          "social_enable": true,
-          "related_enable": true,
-          "related_count": 5,
-          "recently_viewed_enable": true,
-          "recent_count": 5
+          "description_style": "default",
+          "social_enable": true
         }
       },
       "article-template": {
@@ -1299,6 +1356,120 @@
           "page_title_enable": false,
           "page_content_enable": false
         }
+      },
+      "guarantee-warranty": {
+        "type": "guarantee-warranty",
+        "settings": {
+          "image": "shopify://shop_images/image_3.png",
+          "background_color": "#fcf1e3",
+          "heading": "GUARANTEE & WARRANTY",
+          "subheading": "ALL FTC WATCHES ARE GUARANTEED 100% AUTHENTIC.",
+          "description_left": "While we're not an authorized retailer, we source only the most sought-after pieces from trusted vendors and clients.",
+          "description_right": "Each watch undergoes expert authentication to ensure it functions properly and contains original parts matching its serial number.",
+          "padding_top": 20,
+          "padding_bottom": 20
+        }
+      },
+      "warranty-highlight": {
+        "type": "warranty-highlight",
+        "settings": {
+          "heading": "WATCHES FROM FTC COME WITH A 3-YEAR WARRANTY OR THE REMAINING MANUFACTURER’S WARRANTY.",
+          "subtext": "We cover mechanical issues, but not wear, damage, loss, or third-party repairs. Vintage watches aren’t covered due to limited parts. Warranty claims are handled at our discretion.",
+          "image": "shopify://shop_images/image_4.png",
+          "background_color": "#fcf1e3",
+          "padding_top": 20,
+          "padding_bottom": 20
+        }
+      },
+      "custom-faq": {
+        "type": "custom-faq",
+        "blocks": {
+          "faq_item_FakdCh": {
+            "type": "faq_item",
+            "settings": {
+              "question": "Is the watch authentic?",
+              "answer": "Is the watch authentic"
+            }
+          },
+          "faq_item_KB3FjX": {
+            "type": "faq_item",
+            "settings": {
+              "question": "What is your return policy?",
+              "answer": "What is your return policy"
+            }
+          },
+          "faq_item_fGiVGf": {
+            "type": "faq_item",
+            "settings": {
+              "question": "Do you offer a warranty?",
+              "answer": "Do you offer a warranty"
+            }
+          },
+          "faq_item_kAAfPH": {
+            "type": "faq_item",
+            "settings": {
+              "question": "What payment methods do you accept?",
+              "answer": "What payment methods do you accept"
+            }
+          },
+          "faq_item_yrCFkE": {
+            "type": "faq_item",
+            "settings": {
+              "question": "Is international shipping available?",
+              "answer": "Is international shipping available"
+            }
+          },
+          "faq_item_qGTMrB": {
+            "type": "faq_item",
+            "settings": {
+              "question": "Can I trade in or sell my current watch?",
+              "answer": "Can I trade in or sell my current watch"
+            }
+          }
+        },
+        "block_order": [
+          "faq_item_FakdCh",
+          "faq_item_KB3FjX",
+          "faq_item_fGiVGf",
+          "faq_item_kAAfPH",
+          "faq_item_yrCFkE",
+          "faq_item_qGTMrB"
+        ],
+        "settings": {
+          "background_color": "#fcf1e3",
+          "title": "AT FCT, WE’RE PASSIONATE ABOUT FINE SWISS TIMEPIECES AND EXCEPTIONAL SERVICE.",
+          "description": "We buy and sell luxury watches online through a trusted, modern platform.\nWhether you’re adding to your collection or letting go of a piece, we’re here to guide you every step of the way—making sure you feel confident in every decision.",
+          "padding_top": 20,
+          "padding_bottom": 20
+        }
+      },
+      "get-quote": {
+        "type": "get-quote",
+        "settings": {
+          "subheading": "TIME FOR AN UPGRADE?",
+          "heading": "SELL OR TRADE YOUR WATCH",
+          "description": "<p>WE’LL MAKE THE WHOLE PROCESS SMOOTH, FAST, AND FAIR.</p>",
+          "button_label": "Get a quote",
+          "btn_url": "",
+          "left_image": "shopify://shop_images/image_5.png",
+          "small_image": "shopify://shop_images/image_8.png",
+          "right_image": "shopify://shop_images/image_6.png",
+          "padding_top": 20,
+          "padding_bottom": 20
+        }
+      },
+      "related-products": {
+        "type": "related-products",
+        "settings": {
+          "related_count": 3
+        }
+      },
+      "recently-viewed": {
+        "type": "recently-viewed",
+        "settings": {
+          "recently_viewed_enable": true,
+          "recent_count": 3
+        }
       }
     },
     "content_for_index": [
@@ -1509,11 +1680,7 @@
           "type": "product-template",
           "settings": {
             "image_size": "large",
-            "social_enable": true,
-            "related_enable": true,
-            "related_count": 5,
-            "recently_viewed_enable": true,
-            "recent_count": 5
+            "social_enable": true
           }
         },
         "article-template": {
@@ -2100,11 +2267,7 @@
           "settings": {
             "image_size": "large",
             "thumbnail_position": "below",
-            "social_enable": false,
-            "related_enable": true,
-            "related_count": 4,
-            "recently_viewed_enable": true,
-            "recent_count": 4
+            "social_enable": false
           }
         },
         "article-template": {
@@ -2316,7 +2479,6 @@
         "list-collections-template": {
           "type": "list-collections-template",
           "settings": {
-            "title_enable": true,
             "display_type": "all",
             "sort": "alphabetical",
             "grid": "3"
@@ -2324,7 +2486,6 @@
         },
         "1523380258742": {
           "type": "featured-collections",
-          "disabled": true,
           "blocks": {
             "1523380258742-0": {
               "type": "collection",
@@ -2359,6 +2520,7 @@
             "1524685816171",
             "1524685829380"
           ],
+          "disabled": true,
           "settings": {
             "divider": false,
             "per_row": 3,
@@ -2743,11 +2905,7 @@
           "type": "product-template",
           "settings": {
             "image_size": "large",
-            "social_enable": true,
-            "related_enable": true,
-            "related_count": 5,
-            "recently_viewed_enable": true,
-            "recent_count": 5
+            "social_enable": true
           }
         },
         "article-template": {

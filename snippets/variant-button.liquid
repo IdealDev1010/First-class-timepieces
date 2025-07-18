@@ -16,7 +16,7 @@
 {% endif %}
 
 <div class="variant-wrapper variant-wrapper--{{ settings.variant_type }} js">
-  <label class="variant__label{% if option.name == 'Default' or option.name == 'Title' %} hidden-label{% endif %}"
+  <label class="hidden variant__label{% if option.name == 'Default' or option.name == 'Title' %} hidden-label{% endif %}"
     for="ProductSelect-{{ section_id }}-option-{{ forloop.index0 }}">
     {{ option.name }}: <span id="pmtmethodname">{{ current_variant.title }}</span>
     {% if is_color %}
@@ -30,7 +30,7 @@
       </span>
     {% endif %}
   </label>
-  <fieldset class="variant-input-wrap"
+  <fieldset class="variant-input-wrap {% if option.name == "Payment Method" %} payment-variant-input-wrap{% endif %}"
     name="{{ option.name }}"
     id="ProductSelect-{{ section_id }}-option-{{ forloop.index0 }}">
     {%- assign option_index = forloop.index -%}
@@ -63,10 +63,25 @@
         >
           {{ value | escape }}
         </label>
+       
       {% else %}
+        {% assign first_variant = product.variants[0] %}
+        {% assign second_variant = product.variants[1] %}
+        {% assign saved_amount = first_variant.price | minus: second_variant.price %}
         <label
           for="ProductSelect-{{ section_id }}-option-{{ option.name | handleize }}-{{ value | url_encode }}"
-          class="variant__button-label{% unless variant_label_state %} disabled{% endunless %}">{{ value | escape }}</label>
+          class="variant__button-label{% unless variant_label_state %} disabled{% endunless %}{% if forloop.index0 == 1 %}{% if product.variants[1] %} first-variant-option {% endif %}{% endif %}">
+         
+          <div class="product-select-option">
+            {% if forloop.index0 == 1 %}
+              {% if product.variants[1] %}
+                <span class="saved-amount">Recommended • save {{ saved_amount | money }}</span>
+              {% endif %}
+            {% endif %}
+            {{ value | escape }}
+          </div>
+          <h6 class="variant-price">{{ product.variants[forloop.index0].price | money }}</h6>
+        </label>
       {% endif %}
     {% endfor %}
   </fieldset>

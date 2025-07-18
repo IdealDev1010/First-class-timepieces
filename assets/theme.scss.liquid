@@ -17,6 +17,30 @@
   }
 }
 
+@font-face {
+  font-family: "Denton Test";
+  src: url("https://cdn.shopify.com/s/files/1/0089/6306/3874/files/Denton_Test_Light.woff?v=1752719072") format('woff');
+}
+
+@font-face {
+  font-family: "DMSans-VariableFont";
+  src: url("https://cdn.shopify.com/s/files/1/0089/6306/3874/files/DMSans-VariableFont_opsz_wght.woff2?v=1752511513") format('woff2');
+      
+}
+
+// @font-face {
+//   font-family: "Denton Test Medium";
+//   src: url("https://cdn.shopify.com/s/files/1/0089/6306/3874/files/DentonTest-Medium.woff?v=1751569673") format('woff');
+// }
+
+body, a, span {
+  font-family: "DMSans-VariableFont", sans-serif !important;
+}
+
+h1, .h1, h2, .h2, h3, .h3 {
+  font-family: "Denton Test", sans-serif !important;
+}
+
 @mixin clearfix() {
   &::after {
     content: '';
@@ -611,11 +635,11 @@ $textFrameMarginLarge: 10px;
 
 $btnPrimaryFontSize: $type_base_size;
 
-$btnPrimaryPadding: 11px 20px;
+$btnPrimaryPadding: 24px 20px;
 
 $btnPrimaryPaddingSmall: 9px 17px;
 
-$btnMinHeightWhenQuickCheckout: 50px;
+$btnMinHeightWhenQuickCheckout: 72px;
 
 // Form element and tertiary button padding
 
@@ -1711,7 +1735,7 @@ html input[disabled] {
   text-decoration: none;
   text-align: center;
   white-space: normal;
-
+  text-transform: initial !important;
   font-size: $type_base_size - 4;
   font-weight: bold;
   @include accentFontStack;
@@ -1724,10 +1748,6 @@ html input[disabled] {
   vertical-align: middle;
   cursor: pointer;
   border: 1px solid transparent;
-  /* -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none; */
   -webkit-appearance: none;
   -moz-appearance: none;
   border-radius: $input-radius;
@@ -1947,7 +1967,7 @@ html input[disabled] {
   width: 100%;
   padding: $btnPrimaryPadding;
   transition: none;
-  padding: 13px 20px;
+  padding: 24px 20px;
 
   @if ($buttonStyle == 'angled') {
     max-width: 94%;
@@ -5016,7 +5036,7 @@ $color-blankstate-background: #e1e1e1;
   background: $colorNav;
 
   @include media-query($medium-up) {
-    padding: 20px 0;
+    padding: 10px 0;
 
     .toolbar + .header-sticky-wrapper & {
       border-top: 1px solid rgba($colorNavText, 0.1);
@@ -5492,6 +5512,7 @@ $color-blankstate-background: #e1e1e1;
   padding: ($siteNavItemPadding / 2) $siteNavItemPadding;
   white-space: nowrap;
   color: $colorNavText;
+  text-transform: uppercase;
 
   .site-header--heading-style & {
     @include headingFontStack;
@@ -9116,9 +9137,9 @@ $collectionHeroSmall: 250px;
 }
 
 .site-header {
-  @if ($colorNav == $colorBody) {
-    border-bottom: 1px solid $colorBorder;
-  }
+  // @if ($colorNav == $colorBody) {
+  //   border-bottom: 1px solid $colorBorder;
+  // }
   .is-light & {
     border-bottom: none;
   }
@@ -9209,7 +9230,7 @@ $label-bottom-margin: 12px;
 .variant-input-wrap {
   border: 0;
   padding: 0;
-  margin: 0 0 ($gutter / 1.5);
+  margin: ($gutter / 1.5) 0;
   position: relative;
 
   input {

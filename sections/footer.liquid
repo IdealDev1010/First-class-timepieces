@@ -1,14 +1,28 @@
+{{ 'footer.css' | asset_url | stylesheet_tag }}
 <footer class="site-footer">
   <div class="page-width">
-
     <div class="grid">
+      {% assign has_logo_social = section.blocks | where: "type", "logo_social" | first %}
+      {% assign has_newsletter = section.blocks | where: "type", "newsletter" | first %}
+
+      {% if has_logo_social or has_newsletter %}
+        <div class="grid__item logo-with-email">
+          {% if has_logo_social %}
+            {% include 'footer-logo', block: has_logo_social %}
+          {% endif %}
+          {% if has_newsletter %}
+            {% include 'footer-newsletter', block: has_newsletter %}
+          {% endif %}
+        </div>
+      {% endif %}
       {%- assign row_width = 0 -%}
       {% for block in section.blocks %}
+        {% if block.type != 'logo_social' and block.type != 'newsletter' %}
         {%- assign row_width = row_width | plus: block.settings.container_width -%}
-        {% if row_width > 100 %}
+        {% comment %} {% if row_width > 100 %}
           <div class="footer__clear small--hide"></div>
           {%- assign row_width = row_width | minus: 100 -%}
-        {% endif %}
+        {% endif %} {% endcomment %}
 
         <div {{ block.shopify_attributes }} class="grid__item footer__item--{{ block.id }}" data-type="{{ block.type }}">
           <style>
@@ -25,21 +39,31 @@
               .footer__item--{{ block.id }} {
                 width: {{ block.settings.container_width }}%;
               }
-
             }
           </style>
+          {% assign has_logo_or_newsletter = false %}
+            {% if block.type == 'logo_social' or block.type == 'newsletter' %}
+              {% assign has_logo_or_newsletter = true %}
+            {% endif %}
+          
+          {% if has_logo_or_newsletter %}
+            <div class="grid__item logo-with-email">
+                {% if block.type == 'logo_social' %}
+                  {% include 'footer-logo', block: block %}
+                {% elsif block.type == 'newsletter' %}
+                  {% include 'footer-newsletter', block: block %}
+                {% endif %}
+            </div>
+          {% endif %}
 
           {% case block.type %}
-          {% when 'logo_social' %}
-            {% include 'footer-logo', block: block %}
           {% when 'custom' %}
             {% include 'footer-custom-text', block: block %}
-          {% when 'newsletter' %}
-            {% include 'footer-newsletter', block: block %}
           {% when 'menu' %}
             {% include 'footer-menu', block: block %}
           {% endcase %}
         </div>
+      {% endif %}
       {% endfor %}
       {% for block in section.blocks %}
         {% if block.type == 'logo' %}
@@ -48,27 +72,34 @@
           </div>
         {% endif %}
       {% endfor %}
+      {% if section.settings.show_payment_icons %}
+        {% unless shop.enabled_payment_types == empty %}
+          <div class=" grid__item payment-icons-content">
+            <div class="payment-icons-title">Secured payments</div>
+          <ul class="inline-list payment-icons">
+            {% for type in shop.enabled_payment_types %}
+              <li class="icon--payment">
+                {{ type | payment_type_svg_tag: class:'icon icon--full-color' }}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endunless %}
+      {% endif %}
     </div>
 
-    {% if section.settings.show_payment_icons %}
-      {% unless shop.enabled_payment_types == empty %}
-        <ul class="inline-list payment-icons">
-          {% for type in shop.enabled_payment_types %}
-            <li class="icon--payment">
-              {{ type | payment_type_svg_tag: class:'icon icon--full-color' }}
-            </li>
-          {% endfor %}
-        </ul>
-      {% endunless %}
-    {% endif %}
-
     {% if section.settings.show_copyright %}
+      <div class="footer__copyright">
       <p class="footer__small-text">
         &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}
         {% if section.settings.copyright_text != blank %}
           {{ section.settings.copyright_text }}
         {% endif %}
       </p>
+      <div class="created_by">
+        {{ section.settings.created_by }}
+      </div>
+    </div>
     {% endif %}
    
 
@@ -95,6 +126,11 @@
         "type": "text",
         "id": "copyright_text",
         "label": "Additional copyright text"
+      },
+      {
+        "type": "richtext",
+        "id": "created_by",
+        "label": "Created by"
       }
     ],
     "blocks": [
@@ -121,9 +157,9 @@
             "type": "range",
             "id": "container_width",
             "label": "Column width",
-            "default": 25,
+            "default": 100,
             "min": 15,
-            "max": 95,
+            "max": 100,
             "unit": "%"
           }
         ]
@@ -148,9 +184,9 @@
             "type": "range",
             "id": "container_width",
             "label": "Column width",
-            "default": 25,
+            "default": 100,
             "min": 15,
-            "max": 95,
+            "max": 100,
             "unit": "%"
           }
         ]
@@ -187,9 +223,9 @@
             "type": "range",
             "id": "container_width",
             "label": "Column width",
-            "default": 25,
+            "default": 100,
             "min": 15,
-            "max": 95,
+            "max": 100,
             "unit": "%"
           }
         ]
@@ -225,9 +261,9 @@
             "type": "range",
             "id": "container_width",
             "label": "Column width",
-            "default": 25,
+            "default": 100,
             "min": 15,
-            "max": 95,
+            "max": 100,
             "unit": "%"
           }
         ]

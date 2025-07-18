@@ -5,12 +5,12 @@
     </p>
     <button type="button" class="h4 footer__title collapsible-trigger collapsible-trigger-btn medium-up--hide" aria-controls="Footer-{{ block.id }}">
       {{ linklists[block.settings.menu].title }}
-      {% include 'collapsible-icons' %}
+      {% comment %} {% include 'collapsible-icons' %} {% endcomment %}
     </button>
   {% endif %}
   <div
     {% if block.settings.show_footer_title %}
-      id="Footer-{{ block.id }}" class="collapsible-content collapsible-content--small"
+      id="Footer-{{ block.id }}" class="collapsible-content"
     {% endif %}>
     <div class="collapsible-content__inner">
       <div class="footer__collapsible{% unless block.settings.show_footer_title %} footer_collapsible--disabled{% endunless %}">

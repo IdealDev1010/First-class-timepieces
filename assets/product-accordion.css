@@ -1,0 +1,55 @@
+.accordion-header {
+    font-weight: bold;
+    cursor: pointer;
+    padding: 1.6rem;
+    border-top: 1px solid rgba(233, 233, 233, 1);
+    margin-bottom: 0;
+    color: #222;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .accordion-body {
+    display: none;
+    padding: 1rem;
+    border-top: none;
+  }
+
+  .accordion-item.active {
+    background-color: transparent !important;
+  }
+  
+  .accordion-item.active .accordion-body {
+    display: block;
+  }
+
+  .product-single__description > p {
+    display: none;
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    border: none;
+  }
+  
+  table th,
+  table td {
+    border: none;
+    padding: 8px 12px;
+  }
+  
+  table tr {
+    border-bottom: 1px solid #ccc; 
+  }
+  
+  table tr:last-child {
+    border-bottom: none; 
+  }
+  

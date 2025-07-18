@@ -1,0 +1,117 @@
+.site-footer .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    border: 1px solid rgba(34, 34, 34, 0.10);
+}
+
+.site-footer {
+    border-top: none !important;
+}
+
+.site-footer .grid__item {
+    border: 1px solid rgba(34, 34, 34, 0.10);
+    padding: 24px !important;
+}
+
+.site-footer .logo-with-email {
+    grid-row: 1 / span 2;
+    grid-column: 1 / 2;
+    border: 1px solid rgba(34, 34, 34, 0.10);
+}
+
+.site-footer .payment-icons {
+    text-align: left;
+    margin-top: 16px;
+}
+
+.footer__copyright {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.created_by {
+    color: #222;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.created_by p {
+    margin: 0;
+}
+
+.created_by a {
+    text-decoration: underline;
+}
+
+.footer__small-text {
+    color: #222;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+} 
+
+.footer__newsletter-input {
+    color: rgba(34, 34, 34, 0.50);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    border-bottom: 1px solid rgba(34, 34, 34, 0.10);
+}
+
+.footer__newsletter-input::placeholder {
+    color: rgba(34, 34, 34, 0.50);
+}
+
+@media (max-width:767px) {
+    .site-footer .grid {
+        display: grid;
+        grid-template-columns: 1fr; 
+    }
+
+    .site-footer .grid__item:after {
+        display: none;
+    } 
+    
+    .site-footer .grid {
+        margin: 0;
+        text-align: left;
+    }
+
+    .footer__title {
+        text-align: left;
+        overflow: hidden;
+        color: #222;
+        text-overflow: ellipsis;
+        font-family: "Denton Test", sans-serif !important;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .footer__copyright {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer__small-text {
+        text-align: left;
+    }
+
+    .site-footer .grid__item {
+        padding: 14px !important;
+    }
+
+    .payment-icons li {
+        margin: 0;
+    }
+}

@@ -1836,7 +1836,7 @@ lazySizesConfig.expFactor = 4;
         touchThreshold: 5,
         pauseOnHover: false,
         autoplay: args.autoplay ? true : false,
-        autoplaySpeed: this.$slideshow.data('speed')
+        autoplaySpeed: this.$slideshow.data('speed'),
       };
   
       this.$slideshow.off('beforeChange');
@@ -1857,10 +1857,20 @@ lazySizesConfig.expFactor = 4;
         this.$allSlides = obj.$slides;
         this.slideCount = obj.slideCount;
   
+        console.log($);
+        console.log('Slideshow List:', this.$slideshowList);
+        console.log('Slide count:', this.slideCount);
+
         this.$slideshow.addClass(classes.init);
         this._a11y();
         this._clonedLazyloading();
+        if (this.$slideshowList && !this.$slideshowList.hasClass('slick-list')) {
+          this.$slideshowList.addClass('slick-list');
+          console.log('slick-list class added to slideshow')
+        }
       },
+
+      
       beforeSlideChange: function(event, slick, currentSlide, nextSlide) {
         var $slider = slick.$slider;
         var $currentSlide = $slider.find('.' + classes.currentSlide).addClass(classes.animateOut);
@@ -1908,43 +1918,105 @@ lazySizesConfig.expFactor = 4;
       },
   
       // a11y fixes
+      // _a11y: function() {
+      //   var $list = this.$slideshowList;
+      //   var autoplay = this.settings.autoplay;
+  
+      //   if (!$list) {
+      //     return;
+      //   }
+
+      //   if (!this.$wrapper.attr('tabindex')) {
+      //     this.$wrapper.attr('tabindex', '0');
+      //   }
+  
+      //   // Remove default Slick aria-live attr until slider is focused
+      //   $list.removeAttr('aria-live');
+  
+      //   // When an element in the slider is focused
+      //   // pause slideshow and set aria-live
+      //   $(classes.wrapper).on('focusin', function(evt) {
+      //     if (!$(classes.wrapper).has(evt.target).length) {
+      //       return;
+      //     }
+  
+      //      // Apply aria-live to mobile (<= 767px)
+      //      console.log('Focus in detected, checking screen width:', window.innerWidth);
+      //     if (window.innerWidth <= 767) {
+      //       $list.attr('aria-live', 'polite');
+      //       console.log('ARIA live set to polite for mobile');
+      //     }
+      //     if (autoplay) {
+      //       this._pause();
+      //     }
+      //   }.bind(this));
+  
+      //   // Resume autoplay
+      //   $(classes.wrapper).on('focusout', function(evt) {
+      //     if (!$(classes.wrapper).has(evt.target).length) {
+      //       return;
+      //     }
+  
+      //     $list.removeAttr('aria-live');
+      //     console.log('ARIA live removed and autoplay resumed');
+      //     if (autoplay) {
+      //       this._play();
+      //     }
+      //   }.bind(this));
+      // },
       _a11y: function() {
         var $list = this.$slideshowList;
         var autoplay = this.settings.autoplay;
-  
+      
         if (!$list) {
+          console.log('No slideshow list found');
           return;
         }
-  
+      
+        // Ensure the wrapper is focusable by adding tabindex="0" if it is not already
+        if (!this.$wrapper.attr('tabindex')) {
+          this.$wrapper.attr('tabindex', '0');
+        }
+      
+        // Log when aria-live is set
+        console.log('ARIA live region management initialized.');
+      
         // Remove default Slick aria-live attr until slider is focused
         $list.removeAttr('aria-live');
-  
-        // When an element in the slider is focused
-        // pause slideshow and set aria-live
+      
+        // When an element in the slider is focused, pause slideshow and set aria-live
         $(classes.wrapper).on('focusin', function(evt) {
           if (!$(classes.wrapper).has(evt.target).length) {
             return;
           }
-  
-          $list.attr('aria-live', 'polite');
+      
+          console.log('Focus in detected, checking screen width:', window.innerWidth);
+      
+          // Apply aria-live to mobile (<= 767px)
+          if (window.innerWidth <= 767) {
+            $list.attr('aria-live', 'polite');
+            console.log('ARIA live set to polite for mobile');
+          }
+      
           if (autoplay) {
             this._pause();
           }
         }.bind(this));
-  
+      
         // Resume autoplay
         $(classes.wrapper).on('focusout', function(evt) {
           if (!$(classes.wrapper).has(evt.target).length) {
             return;
           }
-  
+      
           $list.removeAttr('aria-live');
+          console.log('ARIA live removed and autoplay resumed');
           if (autoplay) {
             this._play();
           }
         }.bind(this));
       },
-  
+      
       // Make sure lazyloading works on cloned slides
       _clonedLazyloading: function() {
         var $slideshow = this.$slideshow;
