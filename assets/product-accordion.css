@@ -7,12 +7,14 @@
     color: #222;
     font-size: 20px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 500;
     line-height: normal;
     text-transform: uppercase;
     text-align: left;
     display: flex;
     justify-content: space-between;
+    font-family: "Denton Test", sans-serif !important;
+  
   }
   
   .accordion-body {
@@ -46,7 +48,8 @@
   }
   
   table tr {
-    border-bottom: 1px solid #ccc; 
+    border-bottom: 1px solid rgba(34, 34, 34, 0.10); 
+    text-transform: initial;
   }
   
   table tr:last-child {

@@ -15,7 +15,7 @@
     .warranty-highlight-section {
       background-color: {{  section.settings.background_color }};
       padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   
     .warranty-highlight-grid {
@@ -52,6 +52,11 @@
     }
   
     @media (max-width: 767px) {
+      .warranty-highlight-section {
+        padding-top: 20px;
+        padding-bottom: 48px;
+      }
+
       .warranty-highlight-grid {
         display: flex;
         flex-direction: row-reverse;
@@ -117,7 +122,7 @@
         "default": 20,
         "min": 0,
         "max": 80,
-        "step": 5,
+        "step": 2,
         "unit": "px"
       },
       {
@@ -127,7 +132,7 @@
         "default": 20,
         "min": 0,
         "max": 80,
-        "step": 5,
+        "step": 2,
         "unit": "px"
       }
     ],

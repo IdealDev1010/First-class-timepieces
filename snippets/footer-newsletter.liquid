@@ -1,6 +1,6 @@
 <div class="footer__item-padding">
   {% if block.settings.show_footer_title %}
-    <p class="h4 footer__title small--hide">{{ block.settings.title }}</p>
+    <p class="h4 footer__title small--hide footer-newsletter-title">{{ block.settings.title }}</p>
     <button type="button" class="h4 footer__title collapsible-trigger collapsible-trigger-btn medium-up--hide" aria-controls="Footer-{{ block.id }}">
       {{ block.settings.title }}
       {% comment %} {% include 'collapsible-icons' %} {% endcomment %}
@@ -44,3 +44,4 @@
     </div>
   </div>
 </div>
+

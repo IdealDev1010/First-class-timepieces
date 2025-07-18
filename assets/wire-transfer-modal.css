@@ -193,7 +193,7 @@
     font-weight: 400;
     font-family: "DMSans-VariableFont", sans-serif;
     line-height: normal;
-    text-transform: capitalize !important;
+    text-transform: inherit !important;
     border-radius: 4px;
     letter-spacing: 1px;
     padding: 24px 0 !important;
@@ -203,24 +203,26 @@
     margin-bottom: 16px;
   }
 
-  .success-message {
+  .success-message, .modal-success-message {
     border-radius: 4px;
     background: #FCF1E3;
     padding: 16px;
-    color: rgba(232, 73, 42, 1);
+    color: #E8492A;
     display: flex;
     justify-content: center;
     flex-direction: column;
     gap: 8px;
+    margin-bottom: 24px;
   }
 
-  .success-message .message-text {
+  .success-message .message-text, .modal-success-message .message-text {
     text-align: center;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
     text-transform: uppercase;
+    letter-spacing: 0px;
   }
   
   /* Media query for small screens */
